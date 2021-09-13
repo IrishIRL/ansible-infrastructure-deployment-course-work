@@ -1,0 +1,21 @@
+- name: Make user juri
+  ansible.builtin.user:
+    name: juri
+
+- name: Make user roman
+  ansible.builtin.user:
+    name: roman
+
+- name: Set authorized key for juri without validating the TLS/SSL certificates
+  ansible.posix.authorized_key:
+    user: juri
+    state: present
+    key: https://github.com/hudolejev.keys
+    validate_certs: False
+
+- name: Set authorized key for roman without validating the TLS/SSL certificates
+  ansible.posix.authorized_key:
+    user: roman   
+    state: present
+    key: https://github.com/romankuchin.keys
+    validate_certs: False
