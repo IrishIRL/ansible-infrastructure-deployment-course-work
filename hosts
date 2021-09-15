@@ -1,4 +1,4 @@
-IrishIRL-1 ansible_host=193.40.156.86 ansible_port=17022 ansible_ssh_user=ubuntu
+IrishIRL-1 ansible_host=193.40.156.86 ansible_port=5922 ansible_ssh_user=ubuntu
 
 [web_servers]
 IrishIRL-1

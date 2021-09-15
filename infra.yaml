@@ -1,7 +1,9 @@
 ---
-  - name: Lab 2
+  - name: Lab 3
     hosts: web_servers
     become: yes
     roles:
       - users
+      - agama
+      - uwsgi
       - nginx

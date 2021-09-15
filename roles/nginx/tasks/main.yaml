@@ -7,3 +7,14 @@
   ansible.builtin.copy:
     src: index.html
     dest: /var/www/html/index.html
+
+- name: Start automatically with boot
+  ansible.builtin.service:
+    name: nginx
+    enabled: yes
+
+- name: Copy default config from local to host
+  ansible.builtin.copy:
+    src: default
+    dest: /etc/nginx/sites-enabled/default
+  notify: Restart Nginx

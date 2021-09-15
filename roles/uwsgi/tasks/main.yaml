@@ -1,0 +1,16 @@
+- name: Make user agama
+  ansible.builtin.apt:
+    name: 
+      - uwsgi
+      - uwsgi-plugin-python3
+
+- name: Start automatically with boot
+  ansible.builtin.service:
+    name: uwsgi.service    
+    enabled: yes
+
+- name: Copy uWSGI configuration for AGAMA application
+  ansible.builtin.copy:
+    src: agama.ini
+    dest: /etc/uwsgi/apps-enabled/agama.ini  
+  notify: Restart uWSGI
