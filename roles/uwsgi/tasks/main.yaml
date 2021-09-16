@@ -8,6 +8,7 @@
   ansible.builtin.service:
     name: uwsgi.service    
     enabled: yes
+    state: started
 
 - name: Copy uWSGI configuration for AGAMA application
   ansible.builtin.copy:
