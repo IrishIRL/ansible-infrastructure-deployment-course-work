@@ -11,7 +11,6 @@
 - name: Install dependencies
   ansible.builtin.apt:
     name: python3-flask-sqlalchemy
-    update_cache: yes 
 
 - name: Install package itself
   get_url:

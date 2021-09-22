@@ -3,6 +3,7 @@
     name: 
       - uwsgi
       - uwsgi-plugin-python3
+      - python3-pymysql
 
 - name: Start automatically with boot
   ansible.builtin.service:
@@ -10,7 +11,7 @@
     enabled: yes
 
 - name: Copy uWSGI configuration for AGAMA application
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: agama.ini
     dest: /etc/uwsgi/apps-enabled/agama.ini  
   notify: Restart uWSGI
