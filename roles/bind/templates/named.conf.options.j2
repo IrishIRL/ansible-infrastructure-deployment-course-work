@@ -1,0 +1,17 @@
+acl lan {
+  {% for ip in local_ips -%}
+  {{ ip }};
+  {% endfor -%}
+};
+
+options {
+        directory "/var/cache/bind";
+
+        forwarders {
+            {% for ip in forwarders -%}
+            {{ ip }};
+            {% endfor -%}
+        };
+        allow-query { lan; };
+        dnssec-validation no;
+};

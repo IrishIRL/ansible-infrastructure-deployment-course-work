@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.164
+mysql_host: irishirl-2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -8,4 +8,14 @@ mysql_password: !vault |
           66653665366264616635393566393731656239633836336235353631366662316137326266316536
           6663373533363064390a393061306461653430636131326231316631613935326334316261616563
           3430
-
+forwarders:
+  - 1.1.1.1
+  - 8.8.8.8
+  - 9.9.9.9
+  - 9.9.9.10
+local_ips:
+  - 192.168.42.0/24
+  - 127.0.0.0/8
+domain_name: yolo
+root_name: live
+vm_with_bind9: IrishIRL-2

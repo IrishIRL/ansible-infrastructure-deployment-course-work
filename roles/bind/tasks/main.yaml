@@ -1,0 +1,37 @@
+- name: Install Bind9 package
+  ansible.builtin.apt:
+    name: bind9
+
+- name: Show debug info
+  ansible.builtin.debug:
+    msg: "{% for vm in groups['all'] %} {{ hostvars[vm]['ansible_default_ipv4']['address'] }} {% endfor %}"
+
+- name: Stop default DNS
+  ansible.builtin.service:
+    name: systemd-resolved
+    state: stopped
+    enabled: no
+
+- name: Copy Bind9 config
+  ansible.builtin.template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify: restart bind
+
+- name: Copy master zone config
+  ansible.builtin.template:
+    src: db.local.j2
+    dest: /var/cache/bind/db.{ domain_name }
+  notify: restart db
+
+- name: Copy named.conf.local config
+  ansible.builtin.template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify: restart bind
+
+- name: Start Bind9 automatically with boot
+  ansible.builtin.service:
+    name: bind9
+    state: started
+    enabled: yes

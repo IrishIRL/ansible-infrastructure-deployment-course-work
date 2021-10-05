@@ -1,5 +1,12 @@
-IrishIRL-1 ansible_host=193.40.156.86 ansible_port=12222 ansible_ssh_user=ubuntu
-IrishIRL-2 ansible_host=193.40.156.86 ansible_port=16422 ansible_ssh_user=ubuntu
+IrishIRL-1 ansible_port=19422
+IrishIRL-2 ansible_port=12322
+
+[all:vars]
+ansible_host=193.40.156.86
+ansible_ssh_user=ubuntu
+
+[dns_servers]
+IrishIRL-2
 
 [db_servers]
 IrishIRL-2

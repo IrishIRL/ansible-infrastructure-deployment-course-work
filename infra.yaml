@@ -5,11 +5,22 @@
     roles:
       - init
 
+  - name: Collect info about all VMs
+    hosts: all
+    tasks:
+      - setup:
+
   - name: Database server
     hosts: db_servers
     become: yes
     roles:
       - mysql
+     
+  - name: DNS servers
+    hosts: dns_servers
+    become: yes
+    roles:
+      - bind
 
   - name: Web server
     hosts: web_servers
