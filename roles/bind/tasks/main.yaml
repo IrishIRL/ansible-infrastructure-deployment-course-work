@@ -21,7 +21,7 @@
 - name: Copy master zone config
   ansible.builtin.template:
     src: db.local.j2
-    dest: /var/cache/bind/db.{ domain_name }
+    dest: /var/cache/bind/db.{{ domain_name }}
   notify: restart db
 
 - name: Copy named.conf.local config
@@ -30,6 +30,12 @@
     dest: /etc/bind/named.conf.local
   notify: restart bind
 
+- name: Copy resolv.conf config
+  ansible.builtin.template:
+    src: resolv.conf
+    dest: /etc/resolv.conf
+  notify: restart bind
+  
 - name: Start Bind9 automatically with boot
   ansible.builtin.service:
     name: bind9
