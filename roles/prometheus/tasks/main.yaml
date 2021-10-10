@@ -1,0 +1,21 @@
+- name: Install Prometheus package
+  ansible.builtin.apt:
+    name: prometheus
+
+- name: Update Prometheus config
+  ansible.builtin.template:
+    src: prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+  notify: restart prometheus
+
+- name: Update Prometheus Args
+  ansible.builtin.template:
+    src: default_prometheus
+    dest: /etc/default/prometheus
+  notify: restart prometheus
+
+- name: Start Prometheus automatically with boot
+  ansible.builtin.service:
+    name: prometheus
+    state: started
+    enabled: yes

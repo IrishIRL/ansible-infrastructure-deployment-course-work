@@ -10,6 +10,13 @@
     tasks:
       - setup:
 
+  - name: Both servers
+    hosts: all
+    become: yes
+    roles:
+      - nginx
+      - node_exporter
+
   - name: Database server
     hosts: db_servers
     become: yes
@@ -29,3 +36,4 @@
       - agama
       - uwsgi
       - nginx
+      - prometheus

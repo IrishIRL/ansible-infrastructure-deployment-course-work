@@ -4,13 +4,13 @@
       - nginx-full
 
 - name: Copy new index.html page
-  ansible.builtin.copy:
-    src: index.html
+  ansible.builtin.template:
+    src: index.html.j2
     dest: /var/www/html/index.html
 
 - name: Copy default config from local to host
-  ansible.builtin.copy:
-    src: default
+  ansible.builtin.template:
+    src: default.j2
     dest: /etc/nginx/sites-enabled/default
   notify: Restart Nginx
   

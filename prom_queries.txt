@@ -1,0 +1,8 @@
+# Avarage CPU Usage (in percentage): 
+100 - (avg by (instance) (irate(node_cpu_seconds_total{job="linux",mode="idle"}[5m])) * 100)
+
+# Avarage Memory Usage (in percentage):
+100 * (1 - ((avg_over_time(node_memory_MemFree_bytes{job=~"linux"}[30d]) + avg_over_time(node_memory_Cached_bytes{job=~"linux"}[30d]) + avg_over_time(node_memory_Buffers_bytes{job=~"linux"}[30d])) / avg_over_time(node_memory_MemTotal_bytes{job=~"linux"}[30d])))
+
+# Took from: 
+# https://stackoverflow.com/questions/48835035/average-memory-usage-query-prometheus
