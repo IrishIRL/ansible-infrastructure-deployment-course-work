@@ -16,18 +16,21 @@
     roles:
       - nginx
       - node_exporter
+      - nginx_exporter
 
   - name: Database server
     hosts: db_servers
     become: yes
     roles:
       - mysql
-     
+      - mysql_exporter
+
   - name: DNS servers
     hosts: dns_servers
     become: yes
     roles:
       - bind
+      - bind_exporter
 
   - name: Web server
     hosts: web_servers
@@ -36,4 +39,17 @@
       - agama
       - uwsgi
       - nginx
+
+  - name: Prometheus server
+    hosts: prometheus
+    become: yes
+    roles:
       - prometheus
+    tags:
+      - p
+
+  - name: Grafana install
+    hosts: grafana
+    become: yes
+    roles: 
+      - grafana

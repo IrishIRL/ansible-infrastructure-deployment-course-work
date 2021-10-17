@@ -1,0 +1,4 @@
+- name: Install Bind Exporter 
+  ansible.builtin.apt:
+    name: prometheus-bind-exporter
+

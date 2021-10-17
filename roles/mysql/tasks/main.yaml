@@ -6,7 +6,7 @@
   ansible.builtin.copy:
     src: override.cnf
     dest: /etc/mysql/mysql.conf.d/override.cnf
-  notify: Restart mysql
+  notify: restart mysql
 
 - name: Start MySQL server
   ansible.builtin.service:
@@ -23,7 +23,7 @@
     name: "{{ mysql_database }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
-- name: MySQL user
+- name: Create MySQL user
   community.mysql.mysql_user:
     name: "{{ mysql_user }}"
     password: "{{ mysql_password }}"

@@ -1,0 +1,11 @@
+- name: Install MySQL Exporter
+  ansible.builtin.apt:
+    name: prometheus-nginx-exporter
+
+- name: Copy default config from local to host
+  ansible.builtin.template:
+    src: exporter.j2
+    dest: /etc/nginx/sites-enabled/exporter
+  notify:
+    - restart nginx
+    - restart nginx_exporter
