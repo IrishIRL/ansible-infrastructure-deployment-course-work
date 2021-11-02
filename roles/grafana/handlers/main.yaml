@@ -2,3 +2,7 @@
   service:
     name: grafana-server
     state: restarted
+
+- name: change admin pass
+  shell: grafana-cli admin reset-admin-password {{ grafana_password }}
+  no_log: true

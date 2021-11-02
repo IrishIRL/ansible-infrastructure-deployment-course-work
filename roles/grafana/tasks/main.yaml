@@ -8,12 +8,9 @@
     repo: deb https://packages.grafana.com/oss/deb stable main
     state: present
 
-- name: Apt-Get update
-  ansible.builtin.apt:
-    update_cache: yes
-
 - name: Install Grafana
   ansible.builtin.apt:
+    update_cache: yes
     name: grafana
 
 - name: Copying Grafana template
@@ -24,8 +21,8 @@
 
 - name: Copying Dashboard preset
   ansible.builtin.copy:
-    src: main.json
-    dest: /etc/grafana/provisioning/dashboards/main.json
+    src: home.json
+    dest: /usr/share/grafana/public/dashboards/home.json
   notify: restart grafana
 
 - name: Start automatically with boot
@@ -33,4 +30,6 @@
     name: grafana-server
     enabled: yes
     state: started
+  notify: change admin pass 
 
+# change admin pass - not sure when to use.
