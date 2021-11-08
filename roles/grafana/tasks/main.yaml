@@ -12,24 +12,101 @@
   ansible.builtin.apt:
     update_cache: yes
     name: grafana
+  notify: change admin pass
+  register: install_grafana
 
-- name: Copying Grafana template
-  ansible.builtin.template:
-    src: grafana.ini.j2
-    dest: /etc/grafana/grafana.ini
-  notify: restart grafana
-
-- name: Copying Dashboard preset
-  ansible.builtin.copy:
-    src: home.json
-    dest: /usr/share/grafana/public/dashboards/home.json
-  notify: restart grafana
+- name: Pause for 30 sec
+  pause:
+    seconds: 30
+  when: install_grafana.changed
 
 - name: Start automatically with boot
   ansible.builtin.service:
     name: grafana-server
     enabled: yes
     state: started
-  notify: change admin pass 
+  register: start_with_boot
+
+- name: Create directory
+  ansible.builtin.file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+
+- name: Pause for 30 sec
+  pause:
+    seconds: 30
+  when: start_with_boot.changed
+
+- name: Copying Grafana template
+  ansible.builtin.template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+  register: grafana_template_update
+  notify: restart grafana
+
+- name: Pause for 30 sec
+  pause:
+    seconds: 30
+  when: grafana_template_update.changed 
+
+- name: Copying Dashboard preset
+  ansible.builtin.copy:
+    src: main.json
+    dest: /var/lib/grafana/dashboards/home.json
+#    dest: /etc/grafana/provisioning/dashboards/home.json
+#    dest: /usr/share/grafana/public/dashboards/home.json
+  register: grafana_dashboard_first_update
+  notify: restart grafana
+
+- name: Pause for 30 sec
+  pause:
+    seconds: 30
+  when: grafana_dashboard_first_update.changed
+
+- name: Copying Dashboard preset
+  ansible.builtin.copy:
+    src: rsyslog.json
+    dest: /var/lib/grafana/dashboards/rsyslog.json
+#    dest: /etc/grafana/provisioning/dashboards/rsyslog.json
+#    dest: /usr/share/grafana/public/dashboards/rsyslog.json
+  register: grafana_dashboard_second_update
+  notify: restart grafana 
+
+- name: Pause for 30 sec
+  pause:
+    seconds: 30
+  when: grafana_dashboard_second_update.changed
+
+- name: Copying Prometheus preset
+  ansible.builtin.template:
+    src: main.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/main.yaml
+  register: grafana_prometheus_update
+  notify: restart grafana
+
+- name: Pause for 30 sec
+  pause:
+    seconds: 30
+  when: grafana_prometheus_update.changed
+
+- name: Copying Prometheus preset
+  ansible.builtin.template:
+    src: dashboards.yaml.j2
+    dest: /etc/grafana/provisioning/dashboards/sample.yaml
+#  register: grafana_prometheus_update
+  notify: restart grafana
+
+#Grafana will still crash and will not resart here. Do not know how to fix it.
+#- name: Start automatically with boot
+#  ansible.builtin.service:
+#    name: grafana-server
+#    enabled: yes
+#    state: started
 
 # change admin pass - not sure when to use.
+
+#- name: Pause for 10 sec
+#  pause:
+#    seconds: 10
+#  notify: restart grafana
+#  when: grafana_autostart.changed

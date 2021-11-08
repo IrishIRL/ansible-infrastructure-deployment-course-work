@@ -1,0 +1,19 @@
+- name: Copy influx_stats_exporter_linux_amd64
+  ansible.builtin.copy:
+    src: influx_stats_exporter_linux_amd64
+    dest: /usr/local/bin/influx_stats_exporter_linux_amd64
+    mode: a+x
+
+- name: Copy prometheus-influxdb-stats-exporter.service
+  ansible.builtin.copy:
+    src: prometheus-influxdb-stats-exporter.service
+    dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
+    owner: prometheus
+  notify: restart influxdb exporter
+
+- name: Start prometheus-influxdb-stats-exporter.service
+  ansible.builtin.service:
+    name: prometheus-influxdb-stats-exporter.service
+    state: started
+    enabled: yes
+

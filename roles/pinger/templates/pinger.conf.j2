@@ -1,0 +1,5 @@
+{% for vm in groups['influxdb'] %}
+database_url=http://{{ vm }}:8086
+{% endfor %}
+database_name={{ database_name }}
+targets=google.com,cloudflare.com,twitter.com

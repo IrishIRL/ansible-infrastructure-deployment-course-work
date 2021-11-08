@@ -1,0 +1,11 @@
+[Unit]
+Description=Service that pings something
+#Documentation
+After=network-online.target
+
+[Service]
+User=pinger
+ExecStart=/usr/local/bin/pinger.sh
+
+[Install]
+WantedBy=multi-user.target

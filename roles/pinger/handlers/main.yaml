@@ -1,0 +1,10 @@
+- name: reload pinger
+  ansible.builtin.systemd:
+    name: pinger.service    
+    state: restarted
+    daemon_reload: yes
+
+#- name: reload pinger
+#  ansible.builtin.service:
+#    name: pinger
+#    state: reloaded

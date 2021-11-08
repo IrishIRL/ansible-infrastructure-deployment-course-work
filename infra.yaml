@@ -17,6 +17,8 @@
       - nginx
       - node_exporter
       - nginx_exporter
+    tags:
+      - nginx
 
   - name: Database server
     hosts: db_servers
@@ -24,6 +26,8 @@
     roles:
       - mysql
       - mysql_exporter
+    tags:
+      - mysql
 
   - name: DNS servers
     hosts: dns_servers
@@ -31,6 +35,8 @@
     roles:
       - bind
       - bind_exporter
+    tags:
+      - bind
 
   - name: Web server
     hosts: web_servers
@@ -39,6 +45,8 @@
       - agama
       - uwsgi
       - nginx
+    tags: 
+      - web
 
   - name: Prometheus server
     hosts: prometheus
@@ -46,10 +54,30 @@
     roles:
       - prometheus
     tags:
-      - p
+      - prometheus
 
   - name: Grafana install
     hosts: grafana
     become: yes
     roles: 
       - grafana
+    tags:
+      - grafana
+
+  - name: Pinger and influxdb install
+    hosts: influxdb
+    become: yes
+    roles:
+      - influxdb
+      - pinger
+      - influxdb_exporter
+    tags:
+      - pi
+   
+  - name: Rsyslog influx logging
+    hosts: rsyslog
+    become: yes
+    roles:
+      - rsyslog
+    tags:
+      - rsys

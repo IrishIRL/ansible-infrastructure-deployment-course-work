@@ -1,0 +1,26 @@
+apiVersion: 1
+
+datasources:
+- name: Prometheus
+  type: prometheus
+  access: proxy
+{% for vm in groups['prometheus'] %}
+  url: http://{{ vm }}:9090/prometheus
+{% endfor %}
+  isDefault: true
+
+- name: InfluxDB
+  type: influxdb
+  database: {{ database_name }}
+  access: proxy
+{% for vm in groups['influxdb'] %}
+  url: http://{{ vm }}:8086
+{% endfor %}
+
+- name: InfluxDB-telegraf
+  type: influxdb
+  database: telegraf
+  access: proxy
+{% for vm in groups['influxdb'] %}
+  url: http://{{ vm }}:8086
+{% endfor %}

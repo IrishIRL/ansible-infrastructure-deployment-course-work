@@ -1,5 +1,5 @@
-IrishIRL-1 ansible_port=19522
-IrishIRL-2 ansible_port=11322
+IrishIRL-1 ansible_port=1322
+IrishIRL-2 ansible_port=13122
 
 [all:vars]
 ansible_host=193.40.156.86
@@ -21,5 +21,12 @@ IrishIRL-2
 IrishIRL-1
 
 [nginx]
+IrishIRL-1
+IrishIRL-2
+
+[influxdb]
+IrishIRL-1
+
+[rsyslog]
 IrishIRL-1
 IrishIRL-2
