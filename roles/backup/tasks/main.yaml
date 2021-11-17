@@ -1,0 +1,7 @@
+- name: Make user backup
+  ansible.builtin.user:
+    name: backup
+    createhome: yes
+    home: /home/backup
+    generate_ssh_key: yes
+    force: yes

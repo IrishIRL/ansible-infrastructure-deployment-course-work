@@ -4,6 +4,7 @@
     become: yes
     roles:
       - init
+      - backup
 
   - name: Collect info about all VMs
     hosts: all
