@@ -9,7 +9,7 @@ From ansible repo we make a full mirror on the different server with full backup
 Grafana, DNS... - do not need to be backed up. 
 Other services could be re-created running Ansible repo.
 
-2. RPO: Creating backups every night, so acceptable data loss is around 24-25 hours.
+2. RPO: Creating local backups every night at 00:37 UTC and uploading them to backup server at 01:27 UTC, so acceptable data loss is around 24-25 hours.
 
 3. Versioning and retention: backups are stored for 30 days, so 30 versions are stored.
 
@@ -21,3 +21,5 @@ All the results are also well documented and saved for the next 365 days as text
 6. RTO: up to 2 hours
 
 // Just a reminder for myself: in our real case there could be not more than 50MB of backups.
+
+NB! It is a must to create two folders on a backup server before you start: mysql and influxdb. They will be used for the saving backups.

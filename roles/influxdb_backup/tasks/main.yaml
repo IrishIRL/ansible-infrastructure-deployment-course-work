@@ -1,0 +1,13 @@
+# Make folder backup/influxdb
+- name: Make folder backup/influxdb
+  ansible.builtin.file:
+    path: /home/backup/influxdb
+    state: directory
+    recurse: yes
+    owner: backup
+
+# Make file /etc/cron.d/influxdb-backup
+- name: Create file influxdb-backup
+  ansible.builtin.template:
+    src: influxdb-backup.j2
+    dest: /etc/cron.d/influxdb-backup

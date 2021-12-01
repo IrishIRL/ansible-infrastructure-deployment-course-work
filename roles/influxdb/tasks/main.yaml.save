@@ -1,0 +1,49 @@
+# InfluxDB
+- name: Import InfluxDB GPG signing key
+  ansible.builtin.apt_key: 
+    url: https://repos.influxdata.com/influxdb.key 
+    state: present
+
+- name: Add InfluxDB repository
+  ansible.builtin.apt_repository: 
+    repo: 'deb https://repos.influxdata.com/ubuntu trusty stable' 
+    state: present
+
+- name: Install InfluxDB packages
+  ansible.builtin.apt: 
+    name: influxdb
+    update_cache: yes
+
+- name: Start InfluxDB
+  ansible.builtin.service:
+    name: influxdb
+    state: started
+    enabled: yes
+
+- name: Copy InfluxDB config file
+  ansible.builtin.copy:
+    src: influxdb.conf
+    dest: /etc/influxdb/influxdb.conf
+  notify: reload influxd
+
+# Telegraf
+- name: Install Telegraf
+  ansible.builtin.apt:
+    name: telegraf
+
+- name: Copy Telegraf config file
+  ansible.builtin.copy:
+    src: telegraf.conf
+    dest: /etc/telegraf/telegraf.conf
+  notify: reload telegraf
+
+- name: Copy nfluxDB config file ansible.builtin.copy:
+    src: influxdb.conf
+    dest: /etc/influxdb/influxdb.conf
+  notify: reload influxd
+
+- name: Copy InfluxDB config file
+  ansible.builtin.copy:
+    src: influxdb.conf
+    dest: /etc/influxdb/influxdb.conf
+  notify: reload influxd

@@ -5,3 +5,21 @@
     home: /home/backup
     generate_ssh_key: yes
     force: yes
+
+- name: Make folder backup/restore
+  ansible.builtin.file:
+    path: /home/backup/restore
+    state: directory
+    owner: backup
+
+- name: Install Duplicity
+  ansible.builtin.apt:
+    name: duplicity
+    update_cache: yes
+    state: present
+
+- name: Make known_hosts file on backup machine
+  ansible.builtin.template:
+    src: known_hosts.j2
+    dest: /home/backup/.ssh/known_hosts
+    owner: backup

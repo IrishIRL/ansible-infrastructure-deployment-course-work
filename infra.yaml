@@ -21,12 +21,13 @@
     tags:
       - nginx
 
-  - name: Database server
+  - name: Database servers
     hosts: db_servers
     become: yes
     roles:
       - mysql
       - mysql_exporter
+      - mysql_backup
     tags:
       - mysql
 
@@ -72,8 +73,9 @@
       - influxdb
       - pinger
       - influxdb_exporter
+      - influxdb_backup
     tags:
-      - pi
+      - influx
    
   - name: Rsyslog influx logging
     hosts: rsyslog
