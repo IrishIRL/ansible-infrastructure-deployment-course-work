@@ -37,16 +37,17 @@
 
 # First backup on the server should be full, not incremental. 
 # For that reason, it is adviced to make it manually using (change IrishIRL and yolo.live for the correct data):
-# PS. We are only backing up telegraf database in our systems.
-
-    sudo influxd backup -portable -database telegraf /home/backup/influxdb
-    sudo -u backup duplicity --no-encryption full /home//backup/influxdb/ rsync://IrishIRL@backup.yolo.live//home/IrishIRL/influxdb/
+   
+    su backup
+    influxd backup -portable -database telegraf /home/backup/influxdb
+    duplicity --no-encryption full /home//backup/influxdb/ rsync://IrishIRL@backup.yolo.live//home/IrishIRL/influxdb/
 
 
 # To restore the backup you will need to delete existing telegraf database first. It also makes sense to stop the Telegraf service so that it doesn't recreate the database before you could restore it:
 # Logically it should work, but I get some sort of strange error, will look at it more later...
 
-    sudo -u backup duplicity --no-encryption restore rsync://IrishIRL@backup.yolo.live//home/IrishIRL/influxdb/ /home/backup/restore
+    su backup
+    duplicity --no-encryption restore rsync://IrishIRL@backup.yolo.live//home/IrishIRL/influxdb/ /home/backup/restore
 
     service telegraf stop
     influx -execute 'DROP DATABASE telegraf'
