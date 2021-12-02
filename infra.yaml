@@ -5,6 +5,8 @@
     roles:
       - init
       - backup
+    tags:
+      - init
 
   - name: Collect info about all VMs
     hosts: all

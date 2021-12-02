@@ -3,6 +3,7 @@
     name: backup
     createhome: yes
     home: /home/backup
+    shell: /bin/bash
     generate_ssh_key: yes
     force: yes
 
