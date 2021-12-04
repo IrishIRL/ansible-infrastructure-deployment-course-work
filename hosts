@@ -1,5 +1,5 @@
-IrishIRL-1 ansible_port=5122
-IrishIRL-2 ansible_port=11422
+IrishIRL-1 ansible_port=17722
+IrishIRL-2 ansible_port=12222
 
 [all:vars]
 ansible_host=193.40.156.86
@@ -13,6 +13,7 @@ IrishIRL-2
 
 [db_servers]
 IrishIRL-2
+IrishIRL-1
 
 [grafana]
 IrishIRL-2

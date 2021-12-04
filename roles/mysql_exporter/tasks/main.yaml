@@ -3,6 +3,12 @@
     name: prometheus-mysqld-exporter
   register: prom_exporter_installed
 
+- name: Update prometheus-mysqld-exporter to export MySQL data
+  ansible.builtin.template:
+    src: prometheus-mysqld-exporter
+    dest: /etc/default/prometheus-mysqld-exporter
+  notify: restart mysqld export
+
 - name: Add MySQL exporter config
   ansible.builtin.template:
     src: my.cnf.j2
@@ -27,3 +33,4 @@
   notify: 
     - restart mysql
     - restart mysqld export
+

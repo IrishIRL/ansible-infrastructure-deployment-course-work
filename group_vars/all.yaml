@@ -1,8 +1,12 @@
+# node id
+node_id: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'].split('.')[-1] }}"
+public_url: "http://193.40.156.86:{{ node_id }}80"
+
 # used in: mysql_backup/templates/mysql-backup.j2
 git_user: IrishIRL
 
 # mysql
-mysql_host: irishirl-2
+mysql_host: IrishIRL-2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -32,6 +36,17 @@ mysql_backup_password: !vault |
           37646234613837356330326662623362623538383730336435353266383436636666366635633863
           6533323464396534350a303261393564313565326338333365636133343765643163376264326166
           3264
+
+# mysql replication
+mysql_replication_user: replication
+mysql_replication_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35653537626565333662393031623033373037316263313264303964663364616334646461396233
+          3965323761306131343533646266353264626236626431300a653135313262633364646463343463
+          34646438393464653463643563333930633465663165353539623536643237616438663266326636
+          3734333661323231350a313533306432646362316263336438646130323433333266643061333063
+          6562
+
 
 # database for influxdb
 database_name: latency
