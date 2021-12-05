@@ -15,7 +15,7 @@
   notify: change admin pass
   register: install_grafana
 
-- name: Pause for 30 sec jff
+- name: Pause for 30 sec
   pause:
     seconds: 30
   when: install_grafana.changed
@@ -26,6 +26,11 @@
     enabled: yes
     state: started
   register: start_with_boot
+
+- name: Create directory
+  ansible.builtin.file:
+    path: /var/lib/grafana/dashboards
+    state: directory
 
 - name: Pause for 30 sec
   pause:
@@ -47,29 +52,38 @@
 - name: Copying Dashboard preset
   ansible.builtin.copy:
     src: main.json
-    dest: /va/dashboards/rsyslog.json
-#    dest: /usr/share/grafana/public/dashboards/home.json
-  register: grafana_dashboard_first_update
+    dest: /var/lib/grafana/dashboards/home.json
+  register: grafana_dashboard_home
   notify: restart grafana
 
 - name: Pause for 30 sec
   pause:
     seconds: 30
-  when: grafana_dashboard_first_update.changed
-
+  when: grafana_dashboard_home.changed
 
 - name: Copying Dashboard preset
   ansible.builtin.copy:
     src: rsyslog.json
-    dest: /etc/grafana/provisioning/dashboards/rsyslog.json
-#    dest: /usr/share/grafana/public/dashboards/rsyslog.json
-  register: grafana_dashboard_second_update
+    dest: /var/lib/grafana/dashboards/rsyslog.json
+  register: grafana_dashboard_rsyslog
   notify: restart grafana 
 
 - name: Pause for 30 sec
   pause:
     seconds: 30
-  when: grafana_dashboard_second_update.changed
+  when: grafana_dashboard_rsyslog.changed
+
+- name: Copying Dashboard preset
+  ansible.builtin.copy:
+    src: mysql.json
+    dest: /var/lib/grafana/dashboards/mysql.json
+  register: grafana_dashboard_mysql
+  notify: restart grafana
+
+- name: Pause for 30 sec
+  pause:
+    seconds: 30
+  when: grafana_dashboard_mysql.changed
 
 - name: Copying Prometheus preset
   ansible.builtin.template:
@@ -86,7 +100,7 @@
 - name: Copying Prometheus preset
   ansible.builtin.template:
     src: dashboards.yaml.j2
-    dest: /etc/grafana/provisioning/datasources/dashboards.yaml
+    dest: /etc/grafana/provisioning/dashboards/sample.yaml
 #  register: grafana_prometheus_update
   notify: restart grafana
 

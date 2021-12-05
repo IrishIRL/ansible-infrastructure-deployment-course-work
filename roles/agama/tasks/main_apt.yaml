@@ -1,0 +1,33 @@
+- name: Linux user for agama
+  ansible.builtin.user:
+    name: agama
+    system: yes
+
+- name: Stop default DNS
+  ansible.builtin.service:
+    name: systemd-resolved
+    state: stopped
+    enabled: no
+
+- name: Copy resolv.conf config
+  ansible.builtin.template:
+    src: resolv.conf
+    dest: /etc/resolv.conf
+
+- name: Create /opt/agama directory
+  ansible.builtin.file:
+    path: /opt/agama
+    state: directory
+    owner: agama
+
+- name: Install AGAMA dependencies
+  ansible.builtin.apt:
+    name:
+      - python3-flask-sqlalchemy
+      - python3-pymysql        
+  
+- name: Install AGAMA
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
+    dest: /opt/agama
+

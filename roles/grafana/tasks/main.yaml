@@ -1,120 +1,43 @@
-- name: Add an Apt singing key for Grafana
-  ansible.builtin.apt_key:
-    url: https://packages.grafana.com/gpg.key
-    state: present
+# dashboards.yaml.j2 is now renamed and moved to files/default.yaml
+# docker restart grafana - should I put it anywhere?
 
-- name: Add Grafana repo
-  ansible.builtin.apt_repository:
-    repo: deb https://packages.grafana.com/oss/deb stable main
-    state: present
-
-- name: Install Grafana
-  ansible.builtin.apt:
-    update_cache: yes
-    name: grafana
-  notify: change admin pass
-  register: install_grafana
-
-- name: Pause for 30 sec
-  pause:
-    seconds: 30
-  when: install_grafana.changed
-
-- name: Start automatically with boot
-  ansible.builtin.service:
-    name: grafana-server
-    enabled: yes
-    state: started
-  register: start_with_boot
-
-- name: Create directory
+- name: Grafana directories
   ansible.builtin.file:
-    path: /var/lib/grafana/dashboards
+    name: "/opt/grafana/provisioning/{{ item }}/"
     state: directory
+    recurse: yes
+  loop:
+    - datasources
+    - dashboards
 
-- name: Pause for 30 sec
-  pause:
-    seconds: 30
-  when: start_with_boot.changed
-
-- name: Copying Grafana template
+- name: Grafana Docker container
+  community.docker.docker_container:
+    container_default_behavior: no_defaults
+    name: grafana
+    image: grafana/grafana
+    published_ports: "{{ grafana_port }}:3000"
+    volumes: /opt/grafana:/etc/grafana
+    dns_servers: "{{ dns_servers }}"
+    dns_search_domains: 
+      - "{{ domain_name }}.{{ root_name }}"
+  
+- name: Grafana configuration
   ansible.builtin.template:
     src: grafana.ini.j2
-    dest: /etc/grafana/grafana.ini
-  register: grafana_template_update
-  notify: restart grafana
+    dest: /opt/grafana/grafana.ini
+  no_log: yes
 
-- name: Pause for 30 sec
-  pause:
-    seconds: 30
-  when: grafana_template_update.changed 
-
-- name: Copying Dashboard preset
-  ansible.builtin.copy:
-    src: main.json
-    dest: /var/lib/grafana/dashboards/home.json
-  register: grafana_dashboard_home
-  notify: restart grafana
-
-- name: Pause for 30 sec
-  pause:
-    seconds: 30
-  when: grafana_dashboard_home.changed
-
-- name: Copying Dashboard preset
-  ansible.builtin.copy:
-    src: rsyslog.json
-    dest: /var/lib/grafana/dashboards/rsyslog.json
-  register: grafana_dashboard_rsyslog
-  notify: restart grafana 
-
-- name: Pause for 30 sec
-  pause:
-    seconds: 30
-  when: grafana_dashboard_rsyslog.changed
-
-- name: Copying Dashboard preset
-  ansible.builtin.copy:
-    src: mysql.json
-    dest: /var/lib/grafana/dashboards/mysql.json
-  register: grafana_dashboard_mysql
-  notify: restart grafana
-
-- name: Pause for 30 sec
-  pause:
-    seconds: 30
-  when: grafana_dashboard_mysql.changed
-
-- name: Copying Prometheus preset
+- name: Grafana Prometheus preset 
   ansible.builtin.template:
     src: main.yaml.j2
-    dest: /etc/grafana/provisioning/datasources/main.yaml
-  register: grafana_prometheus_update
-  notify: restart grafana
-
-- name: Pause for 30 sec
-  pause:
-    seconds: 30
-  when: grafana_prometheus_update.changed
-
-- name: Copying Prometheus preset
-  ansible.builtin.template:
-    src: dashboards.yaml.j2
-    dest: /etc/grafana/provisioning/dashboards/sample.yaml
-#  register: grafana_prometheus_update
-  notify: restart grafana
-
-#Grafana will still crash and will not resart here. Do not know how to fix it.
-#- name: Start automatically with boot
-#  ansible.builtin.service:
-#    name: grafana-server
-#    enabled: yes
-#    state: started
-
-# change admin pass - not sure when to use.
-
-#- name: Pause for 10 sec
-#  pause:
-#    seconds: 10
-#  notify: restart grafana
-#  when: grafana_autostart.changed
+    dest: /opt/grafana/provisioning/datasources/default.yaml
+  
+- name: Grafana preset installation
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /opt/grafana/provisioning/dashboards/{{ item }}
+  loop:
+    - main.json
+    - mysql.json
+    - syslog.json
+    - default.yaml

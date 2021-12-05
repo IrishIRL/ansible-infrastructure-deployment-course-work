@@ -61,6 +61,7 @@ forwarders:
 local_ips:
   - 192.168.42.0/24
   - 127.0.0.0/8
+  - 172.17.0.0/16
 
 backup_host: 192.168.42.156
 
@@ -68,6 +69,8 @@ domain_name: yolo
 root_name: live
 
 vm_with_bind9: IrishIRL-2
+
+dns_servers: "{{ hostvars[vm_with_bind9]['ansible_default_ipv4']['address'] }}"
 
 # grafana
 grafana_password: !vault |
@@ -78,5 +81,11 @@ grafana_password: !vault |
           3836396663343434630a646134636263633133626639343839306564646163363366323930646465
           3039
 
+grafana_port: 3001
+
+# agama
+agama_port: 8001
+
 # ssh
 backup_server_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
+

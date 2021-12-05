@@ -42,12 +42,20 @@
     tags:
       - bind
 
+  - name: Docker servers
+    hosts: docker_servers
+    become: yes
+    roles:
+      - docker
+    tags:
+      - docker
+
   - name: Web server
     hosts: web_servers
     become: yes
     roles:
       - agama
-      - uwsgi
+#      - uwsgi
       - nginx
     tags: 
       - web
@@ -63,7 +71,7 @@
   - name: Grafana install
     hosts: grafana
     become: yes
-    roles: 
+    roles:
       - grafana
     tags:
       - grafana

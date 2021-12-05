@@ -1,33 +1,27 @@
-- name: Linux user for agama
-  ansible.builtin.user:
-    name: agama
-    system: yes
-
-- name: Stop default DNS
-  ansible.builtin.service:
-    name: systemd-resolved
-    state: stopped
-    enabled: no
-
-- name: Copy resolv.conf config
-  ansible.builtin.template:
-    src: resolv.conf
-    dest: /etc/resolv.conf
-
-- name: Create /opt/agama directory
+- name: opt/agama directory
   ansible.builtin.file:
-    path: /opt/agama
+    name: /opt/agama
     state: directory
-    owner: agama
 
-- name: Install AGAMA dependencies
-  ansible.builtin.apt:
-    name:
-      - python3-flask-sqlalchemy
-      - python3-pymysql        
-  
-- name: Install AGAMA
+- name: Download Agama dockerfile
   ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
-    dest: /opt/agama
+    url: https://raw.githubusercontent.com/hudolejev/agama/master/Dockerfile
+    dest: /opt/agama/Dockerfile
 
+- name: Agama Docker image
+  community.docker.docker_image:
+    name: agama
+    source: build
+    build:
+      path: /opt/agama
+
+- name: Grafana Docker container
+  community.docker.docker_container:
+    container_default_behavior: no_defaults
+    name: agama
+    image: agama
+    published_ports: "{{ agama_port }}:8000"
+    dns_servers: "{{ dns_servers }}"
+    dns_search_domains: "{{ domain_name }}.{{ root_name }}"
+    env:
+      AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
