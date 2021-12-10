@@ -1,12 +1,7 @@
 - name: Install MySQL server
   ansible.builtin.apt:
     name: mysql-server
-
-- name: Copy new config for MySQL
-  ansible.builtin.template:
-    src: override.cnf.j2
-    dest: /etc/mysql/mysql.conf.d/override.cnf
-  notify: restart mysql
+    state: latest
 
 - name: Start MySQL server
   ansible.builtin.service:
@@ -14,9 +9,16 @@
     state: started
     enabled: yes
 
+- name: Copy new config for MySQL
+  ansible.builtin.template:
+    src: override.cnf.j2
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify: restart mysql
+
 - name: Install pymysql
   ansible.builtin.apt:
     name: python3-pymysql
+    state: latest
 
 - name: Create MySQL database
   community.mysql.mysql_db:
@@ -31,13 +33,23 @@
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
+- name: Create MySQL user export
+  community.mysql.mysql_user:
+    name: "{{ mysql_export_user }}"
+    password: "{{ mysql_export_password }}"
+    priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
+  notify: 
+    - restart mysql
+    - restart mysqld export
+
 - name: Create MySQL user {{ mysql_replication_user }}
   community.mysql.mysql_user:
     name: "{{ mysql_replication_user }}"
     password: "{{ mysql_replication_password }}"
     host: "%"
-    priv:
-      '*.*': 'REPLICATION SLAVE'
+    priv: '*.*:REPLICATION SLAVE'
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Set Read Only ON

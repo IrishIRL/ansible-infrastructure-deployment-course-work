@@ -6,11 +6,11 @@
   ansible.builtin.debug:
     msg: "{% for vm in groups['all'] %} {{ hostvars[vm]['ansible_default_ipv4']['address'] }} {% endfor %}"
 
-- name: Stop default DNS
-  ansible.builtin.service:
-    name: systemd-resolved
-    state: stopped
-    enabled: no
+#- name: Stop default DNS
+#  ansible.builtin.service:
+#    name: systemd-resolved
+#    state: stopped
+#    enabled: no
 
 - name: Copy Bind9 config
   ansible.builtin.template:
@@ -30,11 +30,11 @@
     dest: /etc/bind/named.conf.local
   notify: restart bind
 
-- name: Copy resolv.conf config
-  ansible.builtin.template:
-    src: resolv.conf
-    dest: /etc/resolv.conf
-  notify: restart bind
+#- name: Copy resolv.conf config
+#  ansible.builtin.template:
+#    src: resolv.conf
+#    dest: /etc/resolv.conf
+#  notify: restart bind
   
 - name: Start Bind9 automatically with boot
   ansible.builtin.service:

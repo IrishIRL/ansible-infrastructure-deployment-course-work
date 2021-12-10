@@ -18,7 +18,7 @@ mysql_password: !vault |
           3430
 
 # mysql export 
-mysql_export_user: export
+mysql_export_user: exporter
 mysql_export_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           65663936393733393333366134393964646633323666613733646339326130646465666535616661

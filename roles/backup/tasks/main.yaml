@@ -5,7 +5,7 @@
     home: /home/backup
     shell: /bin/bash
     generate_ssh_key: yes
-    force: yes
+#    force: yes
 
 - name: Make folder backup/restore
   ansible.builtin.file:

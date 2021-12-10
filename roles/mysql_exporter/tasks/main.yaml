@@ -35,3 +35,7 @@
     - restart mysql
     - restart mysqld export
 
+- name: Make sure exporter is running
+  ansible.builtin.service:
+    name: prometheus-mysqld-exporter
+    state: started

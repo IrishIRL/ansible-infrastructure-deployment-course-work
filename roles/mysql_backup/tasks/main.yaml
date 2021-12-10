@@ -5,6 +5,19 @@
     state: directory
     recurse: yes
     owner: backup
+    mode: '0700'
+
+# Create MySQL user backup
+- name: Create MySQL user backup
+  community.mysql.mysql_user:
+    name: "{{ mysql_backup_user }}"
+    password: "{{ mysql_backup_password }}"
+    priv: "{{ mysql_database }}.*:LOCK TABLES,SELECT"
+    # '*.*': 'LOCK TABLES,SELECT'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
+  notify:
+    - restart mysql
 
 # Create MySQL config for backup user
 # should we use mode: 0640 for mysql_exporter config?
@@ -13,28 +26,10 @@
     src: my.cnf.j2
     dest: /home/backup/.my.cnf
     owner: backup
-    mode: '0640' 
+    mode: '0740' 
   notify:
     - restart mysql
   register: backup_config
-
-# Pause for 10 seconds if config for backup user was changed
-- name: Pause for 10 sec
-  pause:
-    seconds: 10
-  when: backup_config.changed
-
-# Create MySQL user backup
-- name: Create MySQL user backup
-  community.mysql.mysql_user:
-    name: "{{ mysql_backup_user }}"
-    password: "{{ mysql_backup_password }}"
-    priv:
-      '*.*': 'LOCK TABLES,SELECT'
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-  no_log: true
-  notify:
-    - restart mysql
 
 # Make file /etc/cron.d/mysql-backup
 - name: Create file mysql-backup

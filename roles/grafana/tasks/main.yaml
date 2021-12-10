@@ -10,6 +10,12 @@
     - datasources
     - dashboards
 
+- name: Grafana configuration
+  ansible.builtin.template:
+    src: grafana.ini.j2
+    dest: /opt/grafana/grafana.ini
+  no_log: yes
+
 - name: Grafana Docker container
   community.docker.docker_container:
     container_default_behavior: no_defaults
@@ -20,12 +26,6 @@
     dns_servers: "{{ dns_servers }}"
     dns_search_domains: 
       - "{{ domain_name }}.{{ root_name }}"
-  
-- name: Grafana configuration
-  ansible.builtin.template:
-    src: grafana.ini.j2
-    dest: /opt/grafana/grafana.ini
-  no_log: yes
 
 - name: Grafana Prometheus preset 
   ansible.builtin.template:

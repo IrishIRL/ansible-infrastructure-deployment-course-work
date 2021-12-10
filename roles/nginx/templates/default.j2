@@ -1,51 +1,50 @@
 server {
 	listen 80 default_server;
 
-	location / {
-		#uwsgi_pass localhost:5000;
-		#include uwsgi_params;
+        {% if inventory_hostname in groups['web_servers'] %}
+        location / {
                 proxy_set_header Host $http_host;
                 proxy_pass http://localhost:{{ agama_port }};
-	}
+        }
+        {% endif %}
 
 	location /node-metrics {
 		proxy_pass http://localhost:9100/metrics;
 	}
 
-{% if inventory_hostname in groups['nginx'] %}
+        {% if inventory_hostname in groups['nginx'] %}
         location /nginx-metrics {
                 proxy_pass http://localhost:9113/metrics;
         }
-{% endif %}
+        {% endif %}
 
-{% if inventory_hostname in groups['db_servers'] %}
+        {% if inventory_hostname in groups['db_servers'] %}
         location /mysql-metrics {
                 proxy_pass http://localhost:9104/metrics;
         }
-{% endif %}
+        {% endif %}
 
-{% if inventory_hostname in groups['dns_servers'] %}
+        {% if inventory_hostname in groups['dns_servers'] %}
         location /bind-metrics {
                 proxy_pass http://localhost:9119/metrics;
         }
-{% endif %}
+        {% endif %}
 
-{% if inventory_hostname in groups['prometheus'] %}
+        {% if inventory_hostname in groups['prometheus'] %}
 	location /prometheus {
 		proxy_pass http://localhost:9090;
 	}
-{% endif %}
+        {% endif %}
 
-{% if inventory_hostname in groups['grafana'] %}
+        {% if inventory_hostname in groups['grafana'] %}
         location /grafana {
                 proxy_pass http://localhost:{{ grafana_port }};
         }
-{% endif %}
+        {% endif %}
 
-{% if inventory_hostname in groups['influxdb'] %}
+        {% if inventory_hostname in groups['influxdb'] %}
         location /influxdb-metrics {
                 proxy_pass http://localhost:9424/metrics;
         }
-{% endif %}
-
+        {% endif %}
 }

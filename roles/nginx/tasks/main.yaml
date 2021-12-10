@@ -1,7 +1,7 @@
 - name: HTTP client packages
   ansible.builtin.apt:
-    name:
-      - nginx-full
+    name: nginx
+    state: latest
 
 - name: Copy new index.html page
   ansible.builtin.template:

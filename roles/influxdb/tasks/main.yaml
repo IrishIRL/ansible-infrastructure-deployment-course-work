@@ -30,6 +30,11 @@
 - name: Install Telegraf
   ansible.builtin.apt:
     name: telegraf
+    
+- name: Make sure Telegraf is running
+  service:
+    name: telegraf
+    state: started
 
 - name: Copy Telegraf config file
   ansible.builtin.copy:

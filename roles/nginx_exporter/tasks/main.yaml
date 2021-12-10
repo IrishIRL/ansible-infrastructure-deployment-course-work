@@ -9,3 +9,9 @@
   notify:
     - restart nginx
     - restart nginx_exporter
+    
+- name: Make sure exporter is running
+  service:
+    name: prometheus-nginx-exporter
+    state: started
+

@@ -1,4 +1,10 @@
 - name: Install Bind Exporter 
   ansible.builtin.apt:
     name: prometheus-bind-exporter
+    state: latest
+
+- name: Make sure exporter is running
+  ansible.builtin.service:
+    name: prometheus-bind-exporter
+    state: started
 
