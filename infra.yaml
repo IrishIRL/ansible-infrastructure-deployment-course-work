@@ -65,8 +65,6 @@
     become: yes
     roles:
       - agama
-#      - uwsgi
-#      - nginx
     tags: 
       - web
 
@@ -104,3 +102,12 @@
       - rsyslog
     tags:
       - rsys
+
+  - name: HAProxy and keepalived
+    hosts: web_servers
+    become: yes
+    roles:
+      - haproxy
+      - keepalived
+    tags:
+      - ha

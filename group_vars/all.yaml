@@ -73,6 +73,7 @@ vm_with_bind9: IrishIRL-2
 dns_servers: "{{ hostvars[vm_with_bind9]['ansible_default_ipv4']['address'] }}"
 
 # grafana
+grafana_user: admin
 grafana_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           62356430373661303432623031323936616563613435633337653134636364353233643562653366
@@ -82,6 +83,11 @@ grafana_password: !vault |
           3039
 
 grafana_port: 3001
+
+# haproxy/ keepalived
+nginx_container_per_vm: 2
+main_keepalived_machine: IrishIRL-1
+haproxy_port: 88
 
 # agama
 agama_port: 8001

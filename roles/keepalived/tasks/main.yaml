@@ -1,0 +1,44 @@
+# keepalived
+- name: Install keepalived
+  ansible.builtin.apt:
+    name: keepalived
+
+- name: Copy keepalived config
+  ansible.builtin.template:
+    src: keepalived.conf.j2       
+    dest: /etc/keepalived/keepalived.conf 
+  notify: restart keepalived
+
+- name: Copy vrrp script
+  ansible.builtin.copy:
+    src: vrrp_script
+    dest: /usr/local/bin/vrrp_script
+    mode: 755
+
+- name: Make sure keepalived is running
+  ansible.builtin.service:
+    name: keepalived
+    state: started
+
+
+# keepalived exporter
+
+- name: Download keepalived exporter from backup
+  ansible.builtin.get_url:
+    url: http://backup/keepalived-exporter-1.2.0.linux-amd64.tar.gz
+    dest: /tmp/keepalived-exporter.tar.gz
+
+- name: Untar keepalived exporter
+  ansible.builtin.unarchive:
+    src: /tmp/keepalived-exporter.tar.gz
+    dest: /usr/local/bin/
+    remote_src: yes
+    owner: root
+    group: root
+
+- name: Copy keepalived-exporter service
+  ansible.builtin.copy:
+    src: keepalived-exporter.service
+    dest: /etc/systemd/system/keepalived-exporter.service
+    owner: root
+  notify: reload keepalived exporter
