@@ -1,5 +1,5 @@
-IrishIRL-1 ansible_port=15122
-IrishIRL-2 ansible_port=2622
+IrishIRL-1 ansible_port=2922
+IrishIRL-2 ansible_port=6222
 
 [all:vars]
 ansible_host=193.40.156.86
@@ -8,8 +8,15 @@ ansible_ssh_user=ubuntu
 [prometheus]
 IrishIRL-1
 
-[dns_servers]
+[dns_master]
 IrishIRL-2
+
+[dns_slaves]
+IrishIRL-1
+
+[dns_servers:children]
+dns_master
+dns_slaves
 
 [db_servers]
 IrishIRL-2
@@ -34,5 +41,9 @@ IrishIRL-2
 IrishIRL-1
 
 [rsyslog]
+IrishIRL-1
+IrishIRL-2
+
+[haproxy]
 IrishIRL-1
 IrishIRL-2

@@ -1,4 +1,29 @@
 zone "{{ domain_name }}.{{ root_name }}" {
-    type primary;
+{% if inventory_hostname in groups['dns_master'] %}
+    type master;
+    allow-update {key dns_update_key;};
+    allow-transfer {127.0.0.1; key dns_transfer_key;};
+{% else %}
+    type slave;
+    masters { {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }} ;};
+{% endif %}
     file "db.{{ domain_name }}";
+};
+
+{% if inventory_hostname not in groups['dns_master'] %}
+server {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }} {
+  keys {dns_transfer_key;};
+};
+{% endif %}
+
+zone "{{ reverse_ip }}.in-addr.arpa" {
+{% if inventory_hostname in groups['dns_master'] %}
+    type master;
+    allow-update {key dns_update_key;};
+    allow-transfer {127.0.0.1; key dns_transfer_key;};
+{% else %}
+    type slave;
+    masters { {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }} ;};
+{% endif %}
+    file "db.reverse";
 };

@@ -1,0 +1,15 @@
+$TTL	604800
+{{ reverse_ip }}.in-addr.arpa.	IN	SOA	IrishIRL-2.{{ domain_name }}.{{ root_name }}. irishirl.{{ domain_name }}.{{ root_name }}. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+{% for vm in groups['dns_servers'] %}
+{{ reverse_ip }}.in-addr.arpa.        IN      NS      {{ vm }}.
+{% endfor %}
+{% for vm in groups['dns_servers'] %}
+{{ (hostvars[vm]['ansible_default_ipv4']['address'] | split('.'))[3] }} IN PTR {{ vm }}.{{ domain_name }}.{{ root_name }}.
+{% endfor %}
+{{ backup_host }} IN PTR backup.{{ domain_name }}.{{ root_name }}.

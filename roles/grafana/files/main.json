@@ -178,13 +178,18 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "rate(nginx_http_requests_total[1m])",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
+      "timeFrom": "1h",
       "title": "Nginx requests per min",
       "type": "timeseries"
     },
@@ -250,6 +255,7 @@
         "y": 0
       },
       "id": 13,
+      "interval": "15",
       "options": {
         "legend": {
           "calcs": [],
@@ -305,6 +311,7 @@
           "tags": []
         }
       ],
+      "timeFrom": "1h",
       "title": "Latency",
       "type": "timeseries"
     },
@@ -376,10 +383,14 @@
       "pluginVersion": "8.3.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "bind_up",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
@@ -456,13 +467,19 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "rate(bind_resolver_queries_total[1m])",
+          "instant": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{instance}} - {{type}}",
           "refId": "A"
         }
       ],
+      "timeFrom": "1h",
       "title": "DNS queries per min",
       "type": "timeseries"
     },
@@ -618,13 +635,18 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "rate(mysql_global_status_commands_total[1m])",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{instance}} - {{command}}",
           "refId": "A"
         }
       ],
+      "timeFrom": "1h",
       "title": "MySQL selects per min ",
       "type": "timeseries"
     },
@@ -698,14 +720,19 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "rate(node_cpu_seconds_total[1m])",
           "instant": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{instance}} {{mode}}",
           "refId": "A"
         }
       ],
+      "timeFrom": "1h",
       "title": "CPU load",
       "type": "timeseries"
     },
@@ -806,6 +833,9 @@
               "viz": false
             },
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -857,13 +887,18 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "influxdb_write_write_ok",
+          "expr": "rate(influxdb_write_write_ok[1m])",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
+      "timeFrom": "1h",
       "title": "InfluxDB write status",
       "type": "timeseries"
     },

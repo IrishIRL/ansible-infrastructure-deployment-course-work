@@ -51,6 +51,13 @@
     tags:
       - sys
 
+  - name: DNS records
+    hosts: dns_master
+    roles:
+      - dns_records
+    tags:
+      - dns_records
+
   - name: Docker servers
     hosts: docker_servers
     become: yes
@@ -104,7 +111,7 @@
       - rsys
 
   - name: HAProxy and keepalived
-    hosts: web_servers
+    hosts: haproxy
     become: yes
     roles:
       - haproxy

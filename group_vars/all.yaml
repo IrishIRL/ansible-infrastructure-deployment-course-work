@@ -51,7 +51,9 @@ mysql_replication_password: !vault |
 # database for influxdb
 database_name: latency
 
-# ip and dns related stuff
+# ip and dns
+reverse_ip: 42.168.192
+
 forwarders:
   - 1.1.1.1
   - 8.8.8.8
@@ -71,6 +73,45 @@ root_name: live
 vm_with_bind9: IrishIRL-2
 
 dns_servers: "{{ hostvars[vm_with_bind9]['ansible_default_ipv4']['address'] }}"
+
+dns_update_key: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          61663464336165353362663861396237636261363166393731633562326366323532333533643663
+          6561343737343266653361646138383134393863373932660a643831313134356666653762646364
+          66326332643131376331663061323734343034363263626333383930626338353965376537343330
+          3666626136643338300a336430643937323538643566363361623233626538656434636161333538
+          63323831653335333230366563316163376261323239323662613532316634623961343961613661
+          6333633661616337346364643766353239623964386261326566
+
+dns_transfer_key: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65643933383565616636323063383762623839616430313034336134323933633337323434313139
+          3436363230376433323430303033343064623462323736370a393862323764373331626165663366
+          62306630363264666133356261326633393036383733343666303930306465636534356139666338
+          3866326234353865340a363532613166653037303031663939383663356163313461346536326664
+          30646638323635623234306338383433303566383233336136303261323464303136643431376466
+          3232383362316139386366646437313535343966656231363938
+
+# most probably should be changed 
+dns_a_records:
+  backup: 192.168.42.156
+  cf: 1.1.1.1
+  google: 8.8.4.4
+  google: 8.8.8.8
+  quad9: 9.9.9.9
+
+dns_cname_records:
+  grafana: "{{ groups['grafana'][0] }}"
+  influxdb: "{{ groups['influxdb'][0] }}"
+  lb1: "{{ groups['haproxy'][0] }}"
+  lb2: "{{ groups['haproxy'][1] }}"
+  mysql1: "{{ groups['db_servers'][0] }}"
+  mysql2: "{{ groups['db_servers'][1] }}"
+  ns1: "{{ groups['dns_servers'][0] }}"
+  ns2: "{{ groups['dns_servers'][1] }}"
+  prometheus: "{{ groups['prometheus'][0] }}"
+  web1: "{{ groups['web_servers'][0] }}"
+  web2: "{{ groups['web_servers'][1] }}"
 
 # grafana
 grafana_user: admin
@@ -94,4 +135,5 @@ agama_port: 8001
 
 # ssh
 backup_server_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
+
 

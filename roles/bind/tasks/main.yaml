@@ -1,40 +1,42 @@
 - name: Install Bind9 package
   ansible.builtin.apt:
-    name: bind9
+    name: 
+      - bind9
+      - python3-dnspython
 
 - name: Show debug info
   ansible.builtin.debug:
     msg: "{% for vm in groups['all'] %} {{ hostvars[vm]['ansible_default_ipv4']['address'] }} {% endfor %}"
 
-#- name: Stop default DNS
-#  ansible.builtin.service:
-#    name: systemd-resolved
-#    state: stopped
-#    enabled: no
-
 - name: Copy Bind9 config
   ansible.builtin.template:
     src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
+  no_log: true
   notify: restart bind
 
 - name: Copy master zone config
+  when: inventory_hostname in groups['dns_master']
   ansible.builtin.template:
     src: db.local.j2
     dest: /var/cache/bind/db.{{ domain_name }}
+    force: no
+  notify: restart db
+
+- name: Copy master reverse zone config
+  when: inventory_hostname in groups['dns_master']
+  ansible.builtin.template:
+    src: db.local.reverse.j2
+    dest: /var/cache/bind/db.reverse
+#    force: no
   notify: restart db
 
 - name: Copy named.conf.local config
+#  when: inventory_hostname in groups['dns_master']
   ansible.builtin.template:
     src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
   notify: restart bind
-
-#- name: Copy resolv.conf config
-#  ansible.builtin.template:
-#    src: resolv.conf
-#    dest: /etc/resolv.conf
-#  notify: restart bind
   
 - name: Start Bind9 automatically with boot
   ansible.builtin.service:

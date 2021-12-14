@@ -1,0 +1,28 @@
+
+- name: Set A records
+  community.general.nsupdate:
+    key_name: "dns_update_key"
+    key_algorithm: "hmac-sha256"
+    key_secret: "{{ dns_update_key }}"
+    server: "localhost"
+    zone: "{{ domain_name }}.{{ root_name }}"
+    record: "{{ item.key }}"
+    type: "A"
+    value: "{{ item.value }}"
+  loop: "{{ dns_a_records | dict2items }}"
+  run_once: True
+  notify: restart bind
+
+- name: Set CNAME records
+  community.general.nsupdate:
+    key_name: "dns_update_key"
+    key_algorithm: "hmac-sha256"
+    key_secret: "{{ dns_update_key }}"
+    server: "localhost"
+    zone: "{{ domain_name }}.{{ root_name }}"
+    record: "{{ item.key }}"
+    type: "CNAME"
+    value: "{{ item.value }}"
+  loop: "{{ dns_cname_records | dict2items }}"
+  run_once: True
+  notify: restart bind
