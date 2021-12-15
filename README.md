@@ -1,2 +1,2 @@
 # ica0002
-Repository for ICA0002 - IT Infrastructure course//
+Repository for ICA0002 - IT Infrastructure course
