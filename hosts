@@ -1,8 +1,8 @@
 # internal services machine
-IrishIRL-1 ansible_port=13522
+IrishIRL-1 ansible_port=9922
 # main application stack machine
-IrishIRL-2 ansible_port=9922
-IrishIRL-3 ansible_port=16322
+IrishIRL-2 ansible_port=17922
+IrishIRL-3 ansible_port=4522
 
 [all:vars]
 ansible_host=193.40.156.86
@@ -33,11 +33,6 @@ IrishIRL-1
 IrishIRL-2
 IrishIRL-3
 
-#[nginx]
-#IrishIRL-1
-
-# may could be equal to grafana/ prometheus, 
-# because it is run on the same server
 [web_servers]
 IrishIRL-1
 IrishIRL-2
