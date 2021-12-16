@@ -1,5 +1,8 @@
-IrishIRL-1 ansible_port=2922
-IrishIRL-2 ansible_port=6222
+# internal services machine
+IrishIRL-1 ansible_port=13522
+# main application stack machine
+IrishIRL-2 ansible_port=9922
+IrishIRL-3 ansible_port=16322
 
 [all:vars]
 ansible_host=193.40.156.86
@@ -9,10 +12,11 @@ ansible_ssh_user=ubuntu
 IrishIRL-1
 
 [dns_master]
-IrishIRL-2
+IrishIRL-1
 
 [dns_slaves]
-IrishIRL-1
+IrishIRL-2
+IrishIRL-3
 
 [dns_servers:children]
 dns_master
@@ -20,30 +24,39 @@ dns_slaves
 
 [db_servers]
 IrishIRL-2
-IrishIRL-1
+IrishIRL-3
 
 [grafana]
-IrishIRL-2
+IrishIRL-1
 
+[agama]
+IrishIRL-2
+IrishIRL-3
+
+#[nginx]
+#IrishIRL-1
+
+# may could be equal to grafana/ prometheus, 
+# because it is run on the same server
 [web_servers]
 IrishIRL-1
 IrishIRL-2
+IrishIRL-3
 
-[docker_servers]
-IrishIRL-1
-IrishIRL-2
-
-[nginx]
-IrishIRL-1
-IrishIRL-2
+[docker_servers:children]
+agama
+grafana
 
 [influxdb]
 IrishIRL-1
 
+# should be for all machines?
 [rsyslog]
 IrishIRL-1
 IrishIRL-2
+IrishIRL-3
+#
 
-[haproxy]
-IrishIRL-1
+[haproxy_keepalived]
 IrishIRL-2
+IrishIRL-3

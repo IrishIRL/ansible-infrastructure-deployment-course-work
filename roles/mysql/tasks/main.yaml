@@ -33,17 +33,6 @@
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
-- name: Create MySQL user export
-  community.mysql.mysql_user:
-    name: "{{ mysql_export_user }}"
-    password: "{{ mysql_export_password }}"
-    priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-  no_log: true
-  notify: 
-    - restart mysql
-    - restart mysqld export
-
 - name: Create MySQL user {{ mysql_replication_user }}
   community.mysql.mysql_user:
     name: "{{ mysql_replication_user }}"
@@ -60,6 +49,7 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   when: inventory_hostname != mysql_host
   notify:
+    - restart mysql
     - Reset MySQL source
     - Reset MySQL replica
 
@@ -71,5 +61,6 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   when: inventory_hostname == mysql_host
   notify:
+    - restart mysql
     - Reset MySQL source
     - Reset MySQL replica

@@ -6,7 +6,8 @@ public_url: "http://193.40.156.86:{{ node_id }}80"
 git_user: IrishIRL
 
 # mysql
-mysql_host: IrishIRL-2
+mysql_host: IrishIRL-3
+
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -92,26 +93,24 @@ dns_transfer_key: !vault |
           30646638323635623234306338383433303566383233336136303261323464303136643431376466
           3232383362316139386366646437313535343966656231363938
 
-# most probably should be changed 
 dns_a_records:
   backup: 192.168.42.156
   cf: 1.1.1.1
   google: 8.8.4.4
-  google: 8.8.8.8
   quad9: 9.9.9.9
 
 dns_cname_records:
   grafana: "{{ groups['grafana'][0] }}"
   influxdb: "{{ groups['influxdb'][0] }}"
-  lb1: "{{ groups['haproxy'][0] }}"
-  lb2: "{{ groups['haproxy'][1] }}"
+  lb1: "{{ groups['haproxy_keepalived'][0] }}"
+  lb2: "{{ groups['haproxy_keepalived'][1] }}"
   mysql1: "{{ groups['db_servers'][0] }}"
   mysql2: "{{ groups['db_servers'][1] }}"
   ns1: "{{ groups['dns_servers'][0] }}"
   ns2: "{{ groups['dns_servers'][1] }}"
   prometheus: "{{ groups['prometheus'][0] }}"
-  web1: "{{ groups['web_servers'][0] }}"
-  web2: "{{ groups['web_servers'][1] }}"
+  web1: "{{ groups['agama'][0] }}"
+  web2: "{{ groups['agama'][1] }}"
 
 # grafana
 grafana_user: admin
@@ -127,8 +126,17 @@ grafana_port: 3001
 
 # haproxy/ keepalived
 nginx_container_per_vm: 2
-main_keepalived_machine: IrishIRL-1
+main_keepalived_machine: IrishIRL-2
 haproxy_port: 88
+
+keepalived_user: keepalived_script
+keepalived_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          38306238643938363963623865326335666530623236373238386537383431623039313137313531
+          3966326362396530316238623237373737316431626331300a366232343531376361353261366465
+          65633464663730336663666163303662383131613632383635383264336430323931323764343764
+          6362633665666666610a663565663539653435336263383961343930653465663537343436323937
+          63666432623964643436383365616534316262656139363630323637336662643636
 
 # agama
 agama_port: 8001

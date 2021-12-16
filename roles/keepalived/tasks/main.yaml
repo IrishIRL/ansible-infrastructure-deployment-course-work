@@ -23,14 +23,19 @@
 
 # keepalived exporter
 
+- name: Make keepalived user
+  ansible.builtin.user:
+    name: keepalived_script
+
+# Ideally, I would save it into /tmp/ folder is used
 - name: Download keepalived exporter from backup
   ansible.builtin.get_url:
     url: http://backup/keepalived-exporter-1.2.0.linux-amd64.tar.gz
-    dest: /tmp/keepalived-exporter.tar.gz
+    dest: /keepalived-exporter.tar.gz
 
 - name: Untar keepalived exporter
   ansible.builtin.unarchive:
-    src: /tmp/keepalived-exporter.tar.gz
+    src: /keepalived-exporter.tar.gz
     dest: /usr/local/bin/
     remote_src: yes
     owner: root
@@ -42,3 +47,9 @@
     dest: /etc/systemd/system/keepalived-exporter.service
     owner: root
   notify: reload keepalived exporter
+
+- name: Make sure keepalived-exporter is running
+  ansible.builtin.service:
+    name: keepalived-exporter.service
+    state: started
+    enabled: yes

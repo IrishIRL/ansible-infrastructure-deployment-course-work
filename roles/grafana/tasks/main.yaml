@@ -15,6 +15,7 @@
     src: grafana.ini.j2
     dest: /opt/grafana/grafana.ini
   no_log: yes
+  notify: restart grafana
 
 - name: Grafana Docker container
   community.docker.docker_container:
@@ -23,6 +24,7 @@
     image: grafana/grafana
     published_ports: "{{ grafana_port }}:3000"
     volumes: /opt/grafana:/etc/grafana
+    restart_policy: always
     dns_servers: "{{ dns_servers }}"
     dns_search_domains: 
       - "{{ domain_name }}.{{ root_name }}"
@@ -31,6 +33,7 @@
   ansible.builtin.template:
     src: main.yaml.j2
     dest: /opt/grafana/provisioning/datasources/default.yaml
+  notify: restart grafana
   
 - name: Grafana preset installation
   ansible.builtin.copy:
@@ -41,3 +44,4 @@
     - mysql.json
     - syslog.json
     - default.yaml
+  notify: restart grafana

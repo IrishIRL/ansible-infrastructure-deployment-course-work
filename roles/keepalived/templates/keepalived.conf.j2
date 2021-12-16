@@ -3,6 +3,7 @@ vrrp_script check_haproxy {
     weight 20                              
     interval 1               
 }
+
 vrrp_instance agama {
     interface ens3
     virtual_router_id 51
@@ -16,7 +17,7 @@ vrrp_instance agama {
         192.168.100.{{ hostvars[main_keepalived_machine]['ansible_default_ipv4']['address'].split('.')[-1] }}/24
     }
     unicast_peer {    
-        {% for vm in groups['web_servers'] -%}
+        {% for vm in groups['agama'] -%}
         {% if inventory_hostname != vm -%}                      
         {{ hostvars[vm]['ansible_default_ipv4']['address'] }}
         {% endif -%}
@@ -25,4 +26,8 @@ vrrp_instance agama {
     track_script {
         check_haproxy
     }
+}
+
+global_defs {
+    enable_script_security
 }

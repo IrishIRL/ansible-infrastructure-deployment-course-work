@@ -30,8 +30,9 @@
     dest: /etc/pinger/pinger.conf
   notify: reload pinger
 
-#- name: Reload pinger.service
-#  ansible.builtin.systemd:
-#    state: started
-#    daemon_reload: yes
-#    name: pinger.service
+- name: Make sure pinger.service is running
+  ansible.builtin.systemd:
+    daemon_reload: yes
+    name: pinger.service
+    state: started
+    enabled: yes

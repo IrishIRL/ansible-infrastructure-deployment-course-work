@@ -3,7 +3,7 @@
   ansible.builtin.service:
     name: systemd-resolved
     state: stopped
-#    enabled: no
+    enabled: no
 
 - name: Replace resolv.conf
   template:

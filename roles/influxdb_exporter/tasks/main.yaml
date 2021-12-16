@@ -9,7 +9,7 @@
     src: prometheus-influxdb-stats-exporter.service
     dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
     owner: prometheus
-    mode: '0755'
+#    mode: '0755'
   notify: restart influxdb exporter
 
 - name: Start prometheus-influxdb-stats-exporter.service

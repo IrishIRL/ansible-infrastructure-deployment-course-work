@@ -21,6 +21,10 @@ datasources:
   type: influxdb
   database: telegraf
   access: proxy
+  jsonData: 
+    httpMode: POST
 {% for vm in groups['influxdb'] %}
   url: http://{{ vm }}:8086
 {% endfor %}
+
+#

@@ -27,6 +27,7 @@
     dest: /home/backup/.my.cnf
     owner: backup
     mode: '0740' 
+  no_log: true
   notify:
     - restart mysql
   register: backup_config

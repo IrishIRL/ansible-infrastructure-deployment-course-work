@@ -30,7 +30,7 @@ listen agama
     stats uri /stats
     stats enable
 
-    {% for vm in groups['web_servers'] -%}
+    {% for vm in groups['agama'] -%}
 {% for nginx_container_per_vm in range(nginx_container_per_vm) -%}
     server {{ vm }}{{ loop.index }} {{ vm }}:800{{ nginx_container_per_vm + 1}} check
     {% endfor -%}

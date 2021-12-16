@@ -13,12 +13,12 @@
     tasks:
       - setup:
 
-  - name: Both servers
-    hosts: all
+# shall it be only for nginx (IrishIRL-1), then how should other services work?
+  - name: Nginx install
+    hosts: web_servers
     become: yes
     roles:
       - nginx
-      - node_exporter
       - nginx_exporter
     tags:
       - nginx
@@ -43,7 +43,7 @@
       - bind
 
   - name: systemd-resolved
-    hosts: all
+    hosts: dns_servers
     become: yes
     gather_facts: no
     roles:
@@ -67,8 +67,8 @@
     tags:
       - docker
 
-  - name: Web server
-    hosts: web_servers
+  - name: Agama servers
+    hosts: agama
     become: yes
     roles:
       - agama
@@ -102,16 +102,20 @@
     tags:
       - influx
    
+# rsyslog - should be for all hosts or only for rsyslog machines?
+# logically, we are interested in logging all the servers
+# node_exporter is also used on all machines, so?
   - name: Rsyslog influx logging
-    hosts: rsyslog
+    hosts: all
     become: yes
     roles:
       - rsyslog
+      - node_exporter
     tags:
       - rsys
 
   - name: HAProxy and keepalived
-    hosts: haproxy
+    hosts: haproxy_keepalived
     become: yes
     roles:
       - haproxy

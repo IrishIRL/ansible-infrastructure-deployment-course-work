@@ -11,7 +11,7 @@
     value: "{{ item.value }}"
   loop: "{{ dns_a_records | dict2items }}"
   run_once: True
-  notify: restart bind
+  register: record
 
 - name: Set CNAME records
   community.general.nsupdate:
@@ -25,4 +25,10 @@
     value: "{{ item.value }}"
   loop: "{{ dns_cname_records | dict2items }}"
   run_once: True
+  register: record
+
+- name: Pause for 10 sec
+  pause:
+    seconds: 10
   notify: restart bind
+  when: record.changed

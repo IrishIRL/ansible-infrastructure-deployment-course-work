@@ -1,16 +1,16 @@
 ---
 - name: Install Iptables-persistent
-  apt:
+  ansible.builtin.apt:
     name: iptables-persistent
     state: latest
 
 - name: Upload rule
-  copy:
-    src: iptables_fix
+  ansible.builtin.template:
+    src: mangle
     dest: /etc/iptables/rules.v4
 
 - name: Upload mangle
-  template:
+  ansible.builtin.template:
     src: mangle
     dest: /var/local/iptables.mangle
 

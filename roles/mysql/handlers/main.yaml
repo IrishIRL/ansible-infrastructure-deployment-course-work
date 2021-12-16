@@ -22,7 +22,6 @@
   loop:
     - stopreplica 
     - changeprimary
-    - resetprimary
+    - resetreplica
     - startreplica
   when: inventory_hostname != mysql_host
-
