@@ -1,8 +1,8 @@
 # internal services machine
-IrishIRL-1 ansible_port=9922
+IrishIRL-1 ansible_port=10122
 # main application stack machine
-IrishIRL-2 ansible_port=17922
-IrishIRL-3 ansible_port=4522
+IrishIRL-2 ansible_port=19022
+IrishIRL-3 ansible_port=9122
 
 [all:vars]
 ansible_host=193.40.156.86
@@ -44,13 +44,6 @@ grafana
 
 [influxdb]
 IrishIRL-1
-
-# should be for all machines?
-[rsyslog]
-IrishIRL-1
-IrishIRL-2
-IrishIRL-3
-#
 
 [haproxy_keepalived]
 IrishIRL-2

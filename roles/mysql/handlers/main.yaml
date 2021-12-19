@@ -1,4 +1,4 @@
-- name: restart mysql
+- name: Restart MySQL
   ansible.builtin.service:
     name: mysql.service
     state: restarted
@@ -20,7 +20,7 @@
     primary_password: "{{ mysql_replication_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
   loop:
-    - stopreplica 
+    - stopreplica
     - changeprimary
     - resetreplica
     - startreplica

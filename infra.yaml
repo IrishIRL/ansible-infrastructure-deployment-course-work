@@ -13,7 +13,6 @@
     tasks:
       - setup:
 
-# shall it be only for nginx (IrishIRL-1), then how should other services work?
   - name: Nginx install
     hosts: web_servers
     become: yes
@@ -23,15 +22,15 @@
     tags:
       - nginx
 
-  - name: Database servers
-    hosts: db_servers
-    become: yes
-    roles:
-      - mysql
-      - mysql_exporter
-      - mysql_backup
-    tags:
-      - mysql
+#  - name: Database servers
+#    hosts: db_servers
+#    become: yes
+#    roles:
+#      - mysql
+#      - mysql_exporter
+#      - mysql_backup
+#    tags:
+#      - mysql
 
   - name: DNS servers
     hosts: dns_servers
@@ -58,6 +57,16 @@
     tags:
       - dns_records
 
+  - name: Database servers
+    hosts: db_servers
+    become: yes
+    roles:
+      - mysql
+      - mysql_exporter
+      - mysql_backup
+    tags:
+      - mysql
+
   - name: Docker servers
     hosts: docker_servers
     become: yes
@@ -73,7 +82,7 @@
     roles:
       - agama
     tags: 
-      - web
+      - agama
 
   - name: Prometheus server
     hosts: prometheus
@@ -101,10 +110,7 @@
       - influxdb_backup
     tags:
       - influx
-   
-# rsyslog - should be for all hosts or only for rsyslog machines?
-# logically, we are interested in logging all the servers
-# node_exporter is also used on all machines, so?
+
   - name: Rsyslog influx logging
     hosts: all
     become: yes
@@ -112,7 +118,7 @@
       - rsyslog
       - node_exporter
     tags:
-      - rsys
+      - logging
 
   - name: HAProxy and keepalived
     hosts: haproxy_keepalived

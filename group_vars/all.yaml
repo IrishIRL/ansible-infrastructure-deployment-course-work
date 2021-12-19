@@ -6,7 +6,7 @@ public_url: "http://193.40.156.86:{{ node_id }}80"
 git_user: IrishIRL
 
 # mysql
-mysql_host: IrishIRL-3
+mysql_host: IrishIRL-2
 
 mysql_database: agama
 mysql_user: agama

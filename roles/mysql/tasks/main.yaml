@@ -1,24 +1,20 @@
 - name: Install MySQL server
   ansible.builtin.apt:
-    name: mysql-server
-    state: latest
+    name: 
+      - mysql-server
+      - python3-pymysql
+
+- name: Copy new config for MySQL
+  ansible.builtin.template:
+    src: override.cnf.j2
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify: Restart MySQL
 
 - name: Start MySQL server
   ansible.builtin.service:
     name: mysql
     state: started
     enabled: yes
-
-- name: Copy new config for MySQL
-  ansible.builtin.template:
-    src: override.cnf.j2
-    dest: /etc/mysql/mysql.conf.d/override.cnf
-  notify: restart mysql
-
-- name: Install pymysql
-  ansible.builtin.apt:
-    name: python3-pymysql
-    state: latest
 
 - name: Create MySQL database
   community.mysql.mysql_db:
@@ -38,7 +34,7 @@
     name: "{{ mysql_replication_user }}"
     password: "{{ mysql_replication_password }}"
     host: "%"
-    priv: '*.*:REPLICATION SLAVE'
+    priv: "*.*:REPLICATION SLAVE"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Set Read Only ON
@@ -49,7 +45,6 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   when: inventory_hostname != mysql_host
   notify:
-    - restart mysql
     - Reset MySQL source
     - Reset MySQL replica
 
@@ -61,6 +56,5 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   when: inventory_hostname == mysql_host
   notify:
-    - restart mysql
     - Reset MySQL source
     - Reset MySQL replica

@@ -9,7 +9,7 @@ From ansible repo we make a full mirror on the different server with full backup
 Grafana, DNS... - do not need to be backed up. 
 Other services could be re-created running Ansible repo.
 
-2. RPO: Creating local backups every night at 00:37 UTC and uploading them to backup server at 01:27 UTC, so acceptable data loss is around 24-25 hours.
+2. RPO: Creating local backups every evening at 23:22 UTC and uploading them to backup server at 23:47 UTC, so acceptable data loss is around 24-25 hours.
 
 3. Versioning and retention: backups are stored for 30 days, so 30 versions are stored.
 
