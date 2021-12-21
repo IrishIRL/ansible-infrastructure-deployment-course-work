@@ -2,14 +2,15 @@ Backup SLA:
 
 1. Backup coverage: 
 MySQL, InfluxDB, Ansible repo - should be backed up
-From MySQL we backup sql dump, so data
-From InfluxDB we backup data
+From MySQL we backup sql dump, so the data.
+From InfluxDB we backup telegraf database.
 From ansible repo we make a full mirror on the different server with full backup of all git history.
 
 Grafana, DNS... - do not need to be backed up. 
 Other services could be re-created running Ansible repo.
 
-2. RPO: Creating local backups every evening at 23:22 UTC and uploading them to backup server at 23:47 UTC, so acceptable data loss is around 24-25 hours.
+2. RPO: Creating local backups every evening at 23:22 UTC and uploading them to backup server at 23:47 UTC
+Acceptable data loss is around 24-25 hours.
 
 3. Versioning and retention: backups are stored for 30 days, so 30 versions are stored.
 

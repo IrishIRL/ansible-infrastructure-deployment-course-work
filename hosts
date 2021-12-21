@@ -5,7 +5,7 @@ IrishIRL-2 ansible_port=19022
 IrishIRL-3 ansible_port=9122
 
 [all:vars]
-ansible_host=193.40.156.86
+ansible_host=193.40.156.67
 ansible_ssh_user=ubuntu
 
 [prometheus]

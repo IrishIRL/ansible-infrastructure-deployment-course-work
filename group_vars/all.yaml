@@ -66,7 +66,7 @@ local_ips:
   - 127.0.0.0/8
   - 172.17.0.0/16
 
-backup_host: 192.168.42.156
+backup_host: 192.168.42.132
 
 domain_name: yolo
 root_name: live
@@ -94,7 +94,7 @@ dns_transfer_key: !vault |
           3232383362316139386366646437313535343966656231363938
 
 dns_a_records:
-  backup: 192.168.42.156
+  backup: 192.168.42.132
   cf: 1.1.1.1
   google: 8.8.4.4
   quad9: 9.9.9.9
