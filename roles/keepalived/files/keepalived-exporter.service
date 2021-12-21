@@ -5,7 +5,8 @@ After=network-online.target
 
 [Service]
 User=root
-ExecStart=/usr/local/bin/keepalived-exporter-1.2.0.linux-amd64/keepalived-exporter
+#ExecStart=/usr/local/bin/keepalived-exporter-1.2.0.linux-amd64/keepalived-exporter
+ExecStart=/usr/local/bin/keepalived_exporter/keepalived-exporter-1.2.0.linux-amd64/keepalived-exporter
 
 [Install]
 WantedBy=multi-user.target

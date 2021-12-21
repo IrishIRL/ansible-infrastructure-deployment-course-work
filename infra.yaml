@@ -22,16 +22,6 @@
     tags:
       - nginx
 
-#  - name: Database servers
-#    hosts: db_servers
-#    become: yes
-#    roles:
-#      - mysql
-#      - mysql_exporter
-#      - mysql_backup
-#    tags:
-#      - mysql
-
   - name: DNS servers
     hosts: dns_servers
     become: yes

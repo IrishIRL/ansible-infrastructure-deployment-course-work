@@ -27,16 +27,28 @@
   ansible.builtin.user:
     name: keepalived_script
 
+- name: Create directory for keepalived exporter script
+  ansible.builtin.file:
+    path: /usr/local/bin/keepalived_exporter
+    state: directory
+
+- name: Install Unzip
+  ansible.builtin.apt:
+    name: unzip
+
 # Ideally, I would save it into /tmp/ folder is used
 - name: Download keepalived exporter from backup
   ansible.builtin.get_url:
-    url: http://backup/keepalived-exporter-1.2.0.linux-amd64.tar.gz
-    dest: /keepalived-exporter.tar.gz
+#    url: http://backup/keepalived-exporter-1.2.0.linux-amd64.tar.gz
+    url: https://github.com/cafebazaar/keepalived-exporter/releases/download/v1.2.0/keepalived-exporter-1.2.0.linux-amd64.zip
+#    dest: /keepalived-exporter.tar.gz
+    dest: /usr/local/bin/keepalived_exporter/keepalived-exporter.zip
 
 - name: Untar keepalived exporter
   ansible.builtin.unarchive:
-    src: /keepalived-exporter.tar.gz
-    dest: /usr/local/bin/
+#    src: /keepalived-exporter.tar.gz
+    src: /usr/local/bin/keepalived_exporter/keepalived-exporter.zip
+    dest: /usr/local/bin/keepalived_exporter
     remote_src: yes
     owner: root
     group: root
