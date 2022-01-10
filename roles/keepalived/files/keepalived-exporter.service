@@ -1,5 +1,5 @@
 [Unit]
-Description=Service that exports keepalived
+Description=keepalived-exporter
 Documentation=https://github.com/cafebazaar/keepalived-exporter
 After=network-online.target
 
@@ -10,4 +10,3 @@ ExecStart=/usr/local/bin/keepalived_exporter/keepalived-exporter-1.2.0.linux-amd
 
 [Install]
 WantedBy=multi-user.target
-

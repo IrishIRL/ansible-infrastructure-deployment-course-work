@@ -1,7 +1,11 @@
+global_defs {
+    enable_script_security
+}
+
 vrrp_script check_haproxy {                 
-    script "/usr/local/bin/vrrp_script"
-    weight 20                              
-    interval 1               
+    script "/home/keepalived_script/vrrp_script"
+    weight 20
+    interval 1
 }
 
 vrrp_instance agama {
@@ -14,20 +18,16 @@ vrrp_instance agama {
     {% endif -%}
     advert_int 1
     virtual_ipaddress {                     
-        192.168.100.{{ hostvars[main_keepalived_machine]['ansible_default_ipv4']['address'].split('.')[-1] }}/24
+        192.168.100.{{ (hostvars[main_keepalived_machine]['ansible_default_ipv4']['address'] | split('.'))[3] }}/24
     }
     unicast_peer {    
-        {% for vm in groups['agama'] -%}
-        {% if inventory_hostname != vm -%}                      
+        {% for vm in groups['agama'] %}
+        {% if inventory_hostname != vm %}                      
         {{ hostvars[vm]['ansible_default_ipv4']['address'] }}
-        {% endif -%}
-        {% endfor -%}
+        {% endif %}
+        {% endfor %}
     }
     track_script {
         check_haproxy
     }
-}
-
-global_defs {
-    enable_script_security
 }

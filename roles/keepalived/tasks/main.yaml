@@ -3,38 +3,45 @@
   ansible.builtin.apt:
     name: keepalived
 
+- name: Make sure keepalived is running
+  ansible.builtin.service:
+    name: keepalived
+    state: started
+    enabled: yes
+
+- name: Make keepalived user
+  ansible.builtin.user:
+    name: keepalived_script
+    shell: /bin/bash
+#   home: /home/keepalived_script
+
+- name: Copy vrrp script
+  ansible.builtin.copy:
+    src: vrrp_script
+    dest: /home/keepalived_script/vrrp_script
+    mode: 0755
+#    owner: keepalived_script
+#    group: keepalived_script
+  notify: restart keepalived
+
 - name: Copy keepalived config
   ansible.builtin.template:
     src: keepalived.conf.j2       
     dest: /etc/keepalived/keepalived.conf 
   notify: restart keepalived
 
-- name: Copy vrrp script
-  ansible.builtin.copy:
-    src: vrrp_script
-    dest: /usr/local/bin/vrrp_script
-    mode: 755
-
-- name: Make sure keepalived is running
-  ansible.builtin.service:
-    name: keepalived
-    state: started
-
+#- name: Make sure keepalived is running
+#  ansible.builtin.service:
+#    name: keepalived
+#    state: started
+#    enabled: yes
 
 # keepalived exporter
-
-- name: Make keepalived user
-  ansible.builtin.user:
-    name: keepalived_script
 
 - name: Create directory for keepalived exporter script
   ansible.builtin.file:
     path: /usr/local/bin/keepalived_exporter
     state: directory
-
-- name: Install Unzip
-  ansible.builtin.apt:
-    name: unzip
 
 # Ideally, I would save it into /tmp/ folder is used
 - name: Download keepalived exporter from backup
@@ -44,21 +51,36 @@
 #    dest: /keepalived-exporter.tar.gz
     dest: /usr/local/bin/keepalived_exporter/keepalived-exporter.zip
 
-- name: Untar keepalived exporter
+# Unzipping keepalived exporter script
+- name: Install unzip
+  ansible.builtin.apt:
+    name: unzip
+
+- name: Unzip keepalived exporter
   ansible.builtin.unarchive:
-#    src: /keepalived-exporter.tar.gz
+    remote_src: yes
     src: /usr/local/bin/keepalived_exporter/keepalived-exporter.zip
     dest: /usr/local/bin/keepalived_exporter
-    remote_src: yes
-    owner: root
-    group: root
+    mode: a+x
+
+#- name: Untar keepalived exporter
+#  ansible.builtin.unarchive:
+#    src: /keepalived-exporter.tar.gz
+##    src: /usr/local/bin/keepalived_exporter/keepalived-exporter.zip
+##    dest: /usr/local/bin
+#    dest: /usr/local/bin/keepalived_exporter
+#    remote_src: yes
+#    owner: keepalived_script
+#    group: keepalived_script
 
 - name: Copy keepalived-exporter service
   ansible.builtin.copy:
     src: keepalived-exporter.service
     dest: /etc/systemd/system/keepalived-exporter.service
-    owner: root
-  notify: reload keepalived exporter
+#    owner: keepalived_script
+  notify:
+    - daemon reload
+    - reload keepalived exporter
 
 - name: Make sure keepalived-exporter is running
   ansible.builtin.service:

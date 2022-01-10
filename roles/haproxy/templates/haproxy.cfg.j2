@@ -24,7 +24,7 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-listen agama
+listen my_ha_frontend
     bind *:{{ haproxy_port }}
 
     stats uri /stats

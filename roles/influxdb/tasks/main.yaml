@@ -35,6 +35,7 @@
   service:
     name: telegraf
     state: started
+    enabled: yes
 
 - name: Copy Telegraf config file
   ansible.builtin.copy:
