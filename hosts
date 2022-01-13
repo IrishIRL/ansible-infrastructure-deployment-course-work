@@ -1,8 +1,8 @@
 # internal services machine
-IrishIRL-1 ansible_port=12322
+IrishIRL-1 ansible_port=12022
 # main application stack machine
-IrishIRL-2 ansible_port=2022
-IrishIRL-3 ansible_port=9222
+IrishIRL-2 ansible_port=16622
+IrishIRL-3 ansible_port=15722
 
 [all:vars]
 ansible_host=193.40.156.67
