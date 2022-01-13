@@ -6,7 +6,7 @@ public_url: "http://193.40.156.86:{{ node_id }}80"
 git_user: IrishIRL
 
 # mysql
-mysql_host: IrishIRL-2
+mysql_host: IrishIRL-3
 
 mysql_database: agama
 mysql_user: agama
@@ -139,7 +139,10 @@ keepalived_password: !vault |
           63666432623964643436383365616534316262656139363630323637336662643636
 
 # agama
-agama_port: 8001
+agama_port: 9000
+agama_items:
+  - 1
+  - 9
 
 # ssh
 #backup_server_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
