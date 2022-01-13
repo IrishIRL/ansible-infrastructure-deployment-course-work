@@ -14,6 +14,7 @@
 
 # Restore MySQL data from the backup (change IrishIRL and yolo.live for your correct data):
 # NB! You should input the data to the machine with your working database! If you have master and slave setup, upload to the master machine.
+# NB! You need to have sudo priveledges to do the current steps. As an example, I am doing those teps via my root account. Maybe there are more secure ways to do that.
 
     sudo -u backup duplicity --no-encryption restore rsync://IrishIRL@backup.yolo.live//home/IrishIRL/mysql/ /home/backup/restore/
     mysql agama < /home/backup/restore/agama.sql
@@ -28,7 +29,9 @@
 # From there list the data you want to check, for example:
 
    mysql> SHOW DATABASES;
-   mysql> SELECT * FROM agama;
+   mysql> USE agama;
+   mysql> SHOW TABLES;
+   mysql> SELECT * FROM item;
 
 
 
