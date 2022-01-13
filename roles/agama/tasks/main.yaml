@@ -18,14 +18,13 @@
 - name: Agama Docker container
   community.docker.docker_container:
     container_default_behavior: no_defaults
-    name: agama-{{ item }}
+    name: agama-{{ item.value }}
     image: agama
-    published_ports: "{{ agama_port + item }}:8000"
+    published_ports: "{{ agama_port + item.value }}:8000"
     dns_servers: "{{ dns_servers }}"
     dns_search_domains: "{{ domain_name }}.{{ root_name }}"
     restart_policy: always
     env:
       AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
-  loop:
-    - 1
-    - 9
+  loop: "{{ agama_items | dict2items }}"
+ #   - ${{ each item in parameters.agama_items }}

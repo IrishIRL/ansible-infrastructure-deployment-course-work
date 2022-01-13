@@ -141,8 +141,8 @@ keepalived_password: !vault |
 # agama
 agama_port: 9000
 agama_items:
-  - 1
-  - 9
+  item1: 1
+  item2: 9
 
 # ssh
 #backup_server_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
