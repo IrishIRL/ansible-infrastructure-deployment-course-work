@@ -27,4 +27,3 @@
     env:
       AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
   loop: "{{ agama_items | dict2items }}"
- #   - ${{ each item in parameters.agama_items }}

@@ -31,7 +31,7 @@ listen my_ha_frontend
     stats enable
 
     {% for vm in groups['agama'] -%}
-{% for nginx_container_per_vm in range(nginx_container_per_vm) -%}
-    server {{ vm }}{{ loop.index }} {{ vm }}:800{{ nginx_container_per_vm + 1}} check
+{% for agama_item in (agama_items | dict2items) -%}
+    server {{ vm }}{{ agama_item.value }} {{ vm }}:{{agama_port + agama_item.value }} check
     {% endfor -%}
     {% endfor -%}
