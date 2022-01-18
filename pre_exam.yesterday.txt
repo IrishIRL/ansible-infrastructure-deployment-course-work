@@ -1,4 +1,4 @@
-Tue 18 Jan 2022 01:02:08 AM PST
+Mon 17 Jan 2022 11:52:23 AM PST
 + hostname
 ubuntu
 + ansible-playbook infra.yaml --diff
@@ -6,19 +6,19 @@ ubuntu
 PLAY [Init] ********************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [init : Update APT cache] *************************************************
-changed: [IrishIRL-1]
+ok: [IrishIRL-1]
+ok: [IrishIRL-2]
 changed: [IrishIRL-3]
-changed: [IrishIRL-2]
 
 TASK [backup : Make user backup] ***********************************************
 changed: [IrishIRL-1]
-changed: [IrishIRL-3]
 changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [backup : Make folder backup/restore] *************************************
 --- before
@@ -44,7 +44,7 @@ changed: [IrishIRL-3]
 +    "state": "directory"
  }
 
-changed: [IrishIRL-1]
+changed: [IrishIRL-2]
 --- before
 +++ after
 @@ -1,5 +1,5 @@
@@ -56,7 +56,7 @@ changed: [IrishIRL-1]
 +    "state": "directory"
  }
 
-changed: [IrishIRL-2]
+changed: [IrishIRL-1]
 
 TASK [backup : Install Duplicity] **********************************************
 The following additional packages will be installed:
@@ -69,17 +69,6 @@ The following NEW packages will be installed:
   duplicity librsync2 python3-bcrypt python3-fasteners python3-future
   python3-lockfile python3-monotonic python3-paramiko
 0 upgraded, 8 newly installed, 0 to remove and 142 not upgraded.
-changed: [IrishIRL-2]
-The following additional packages will be installed:
-  librsync2 python3-bcrypt python3-fasteners python3-future python3-lockfile
-  python3-monotonic python3-paramiko
-Suggested packages:
-  python3-boto ncftp lftp tahoe-lafs python3-swiftclient python3-pip par2
-  python-future-doc python-lockfile-doc python3-gssapi
-The following NEW packages will be installed:
-  duplicity librsync2 python3-bcrypt python3-fasteners python3-future
-  python3-lockfile python3-monotonic python3-paramiko
-0 upgraded, 8 newly installed, 0 to remove and 142 not upgraded.
 changed: [IrishIRL-3]
 The following additional packages will be installed:
   librsync2 python3-bcrypt python3-fasteners python3-future python3-lockfile
@@ -92,48 +81,59 @@ The following NEW packages will be installed:
   python3-lockfile python3-monotonic python3-paramiko
 0 upgraded, 8 newly installed, 0 to remove and 142 not upgraded.
 changed: [IrishIRL-1]
+The following additional packages will be installed:
+  librsync2 python3-bcrypt python3-fasteners python3-future python3-lockfile
+  python3-monotonic python3-paramiko
+Suggested packages:
+  python3-boto ncftp lftp tahoe-lafs python3-swiftclient python3-pip par2
+  python-future-doc python-lockfile-doc python3-gssapi
+The following NEW packages will be installed:
+  duplicity librsync2 python3-bcrypt python3-fasteners python3-future
+  python3-lockfile python3-monotonic python3-paramiko
+0 upgraded, 8 newly installed, 0 to remove and 142 not upgraded.
+changed: [IrishIRL-2]
 
 TASK [backup : Make known_hosts file on backup machine] ************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp4b57uktp/known_hosts.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpo_siuub1/known_hosts.j2
 @@ -0,0 +1,2 @@
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup.yolo.live ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 
-changed: [IrishIRL-1]
+changed: [IrishIRL-2]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpi6um7e1p/known_hosts.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpgy96fxhl/known_hosts.j2
 @@ -0,0 +1,2 @@
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup.yolo.live ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 
 changed: [IrishIRL-3]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpfg10p9ym/known_hosts.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpju3flhzn/known_hosts.j2
 @@ -0,0 +1,2 @@
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup.yolo.live ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 
-changed: [IrishIRL-2]
+changed: [IrishIRL-1]
 
 PLAY [Collect info about all VMs] **********************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-2]
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [setup] *******************************************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 ok: [IrishIRL-1]
-ok: [IrishIRL-2]
 
 PLAY [Nginx install] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-2]
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [nginx : HTTP client packages] ********************************************
 The following additional packages will be installed:
@@ -149,6 +149,20 @@ The following NEW packages will be installed:
   libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
   libwebp6 libxpm4 nginx nginx-common nginx-core
 0 upgraded, 17 newly installed, 0 to remove and 142 not upgraded.
+changed: [IrishIRL-2]
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
+  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
+  libwebp6 libxpm4 nginx-common nginx-core
+Suggested packages:
+  libgd-tools fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
+  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
+  libwebp6 libxpm4 nginx nginx-common nginx-core
+0 upgraded, 17 newly installed, 0 to remove and 142 not upgraded.
 changed: [IrishIRL-3]
 The following additional packages will be installed:
   fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
@@ -164,37 +178,10 @@ The following NEW packages will be installed:
   libwebp6 libxpm4 nginx nginx-common nginx-core
 0 upgraded, 17 newly installed, 0 to remove and 142 not upgraded.
 changed: [IrishIRL-1]
-The following additional packages will be installed:
-  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
-  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
-  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
-  libwebp6 libxpm4 nginx-common nginx-core
-Suggested packages:
-  libgd-tools fcgiwrap nginx-doc ssl-cert
-The following NEW packages will be installed:
-  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
-  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
-  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
-  libwebp6 libxpm4 nginx nginx-common nginx-core
-0 upgraded, 17 newly installed, 0 to remove and 142 not upgraded.
-changed: [IrishIRL-2]
 
 TASK [nginx : Copy new index.html page] ****************************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp8smumvcn/index.html.j2
-@@ -0,0 +1,8 @@
-+<html>
-+    <head>
-+        <title> IrishIRL-3 - Nginx</title>
-+    </head>
-+    <body>
-+        <h1>Nginx running on IrishIRL-3<h1>
-+    </body>
-+</html>
-
-changed: [IrishIRL-3]
---- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpkcewfxud/index.html.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp66b3mx28/index.html.j2
 @@ -0,0 +1,8 @@
 +<html>
 +    <head>
@@ -207,7 +194,20 @@ changed: [IrishIRL-3]
 
 changed: [IrishIRL-1]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpzmbgm8i3/index.html.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpn5i1c_ki/index.html.j2
+@@ -0,0 +1,8 @@
++<html>
++    <head>
++        <title> IrishIRL-3 - Nginx</title>
++    </head>
++    <body>
++        <h1>Nginx running on IrishIRL-3<h1>
++    </body>
++</html>
+
+changed: [IrishIRL-3]
+--- before
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp_7po0eue/index.html.j2
 @@ -0,0 +1,8 @@
 +<html>
 +    <head>
@@ -222,7 +222,7 @@ changed: [IrishIRL-2]
 
 TASK [nginx : Copy default config from local to host] **************************
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpcccyb_4e/default.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpl0boah5o/default.j2
 @@ -1,91 +1,35 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -265,7 +265,7 @@ TASK [nginx : Copy default config from local to host] **************************
 -	# include snippets/snakeoil.conf;
 +                location / {
 +                proxy_set_header Host $http_host;
-+                proxy_pass http://localhost:9001;
++                proxy_pass http://localhost:9000;
 +        }
 +        
 +                location /haproxy-metrics {
@@ -345,9 +345,9 @@ TASK [nginx : Copy default config from local to host] **************************
 +        
 +        }
 
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpodkooqv2/default.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpmf1pa_38/default.j2
 @@ -1,91 +1,30 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -467,7 +467,7 @@ changed: [IrishIRL-2]
 
 changed: [IrishIRL-1]
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp47tlqil5/default.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpi5kbkyqh/default.j2
 @@ -1,91 +1,35 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -510,7 +510,7 @@ changed: [IrishIRL-1]
 -	# include snippets/snakeoil.conf;
 +                location / {
 +                proxy_set_header Host $http_host;
-+                proxy_pass http://localhost:9001;
++                proxy_pass http://localhost:9000;
 +        }
 +        
 +                location /haproxy-metrics {
@@ -590,30 +590,41 @@ changed: [IrishIRL-1]
 +        
 +        }
 
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 
 TASK [nginx : Start automatically with boot] ***********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [nginx_exporter : Install MySQL Exporter] *********************************
 The following NEW packages will be installed:
   prometheus-nginx-exporter
 0 upgraded, 1 newly installed, 0 to remove and 142 not upgraded.
+changed: [IrishIRL-2]
+The following NEW packages will be installed:
+  prometheus-nginx-exporter
+0 upgraded, 1 newly installed, 0 to remove and 142 not upgraded.
 changed: [IrishIRL-1]
 The following NEW packages will be installed:
   prometheus-nginx-exporter
 0 upgraded, 1 newly installed, 0 to remove and 142 not upgraded.
 changed: [IrishIRL-3]
-The following NEW packages will be installed:
-  prometheus-nginx-exporter
-0 upgraded, 1 newly installed, 0 to remove and 142 not upgraded.
-changed: [IrishIRL-2]
 
 TASK [nginx_exporter : Copy default config from local to host] *****************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp79ia6ie7/exporter.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp99qq_wst/exporter.j2
+@@ -0,0 +1,6 @@
++server {
++        listen 8080 default_server;
++        location /stub_status {
++                stub_status;
++        }
++}
+
+changed: [IrishIRL-1]
+--- before
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpkjwk7opv/exporter.j2
 @@ -0,0 +1,6 @@
 +server {
 +        listen 8080 default_server;
@@ -624,7 +635,7 @@ TASK [nginx_exporter : Copy default config from local to host] *****************
 
 changed: [IrishIRL-3]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp9gk34v32/exporter.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpbhby_39v/exporter.j2
 @@ -0,0 +1,6 @@
 +server {
 +        listen 8080 default_server;
@@ -634,27 +645,16 @@ changed: [IrishIRL-3]
 +}
 
 changed: [IrishIRL-2]
---- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpcnsgb44e/exporter.j2
-@@ -0,0 +1,6 @@
-+server {
-+        listen 8080 default_server;
-+        location /stub_status {
-+                stub_status;
-+        }
-+}
-
-changed: [IrishIRL-1]
 
 TASK [nginx_exporter : Make sure exporter is running] **************************
+changed: [IrishIRL-1]
 changed: [IrishIRL-3]
 changed: [IrishIRL-2]
-changed: [IrishIRL-1]
 
 RUNNING HANDLER [nginx : Restart Nginx] ****************************************
 changed: [IrishIRL-3]
-changed: [IrishIRL-2]
 changed: [IrishIRL-1]
+changed: [IrishIRL-2]
 
 RUNNING HANDLER [nginx_exporter : restart nginx] *******************************
 changed: [IrishIRL-1]
@@ -662,16 +662,16 @@ changed: [IrishIRL-3]
 changed: [IrishIRL-2]
 
 RUNNING HANDLER [nginx_exporter : restart nginx_exporter] **********************
+changed: [IrishIRL-1]
 changed: [IrishIRL-3]
 changed: [IrishIRL-2]
-changed: [IrishIRL-1]
 
 PLAY [DNS servers] *************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [bind : Install Bind9 package] ********************************************
 The following additional packages will be installed:
@@ -683,16 +683,6 @@ The following NEW packages will be installed:
 The following packages will be upgraded:
   bind9-dnsutils bind9-libs
 2 upgraded, 5 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-3]
-The following additional packages will be installed:
-  bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
-Suggested packages:
-  bind-doc resolvconf python-ply-doc
-The following NEW packages will be installed:
-  bind9 bind9-utils dns-root-data python3-dnspython python3-ply
-The following packages will be upgraded:
-  bind9-dnsutils bind9-libs
-2 upgraded, 5 newly installed, 0 to remove and 140 not upgraded.
 changed: [IrishIRL-2]
 The following additional packages will be installed:
   bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
@@ -704,16 +694,26 @@ The following packages will be upgraded:
   bind9-dnsutils bind9-libs
 2 upgraded, 5 newly installed, 0 to remove and 140 not upgraded.
 changed: [IrishIRL-1]
+The following additional packages will be installed:
+  bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
+Suggested packages:
+  bind-doc resolvconf python-ply-doc
+The following NEW packages will be installed:
+  bind9 bind9-utils dns-root-data python3-dnspython python3-ply
+The following packages will be upgraded:
+  bind9-dnsutils bind9-libs
+2 upgraded, 5 newly installed, 0 to remove and 140 not upgraded.
+changed: [IrishIRL-3]
 
 TASK [bind : Show debug info] **************************************************
 ok: [IrishIRL-1] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 ok: [IrishIRL-2] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 ok: [IrishIRL-3] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 
 TASK [bind : Copy Bind9 config] ************************************************
@@ -725,7 +725,7 @@ TASK [bind : Copy master zone config] ******************************************
 skipping: [IrishIRL-2]
 skipping: [IrishIRL-3]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp8w_70wyj/db.local.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpyedw0r7z/db.local.j2
 @@ -0,0 +1,15 @@
 +$TTL	604800
 +yolo.live.	IN	SOA	IrishIRL-2.yolo.live. irishirl.yolo.live. (
@@ -738,9 +738,9 @@ skipping: [IrishIRL-3]
 +yolo.live.        IN      NS      IrishIRL-1
 +yolo.live.        IN      NS      IrishIRL-2
 +yolo.live.        IN      NS      IrishIRL-3
-+IrishIRL-1 IN A 192.168.42.185
-+IrishIRL-2 IN A 192.168.42.165
-+IrishIRL-3 IN A 192.168.42.54
++IrishIRL-1 IN A 192.168.42.187
++IrishIRL-2 IN A 192.168.42.33
++IrishIRL-3 IN A 192.168.42.130
 +backup.yolo.live. IN A 192.168.42.132
 
 changed: [IrishIRL-1]
@@ -749,7 +749,7 @@ TASK [bind : Copy master reverse zone config] **********************************
 skipping: [IrishIRL-2]
 skipping: [IrishIRL-3]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmph5gmz_0d/db.local.reverse.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpynqyragj/db.local.reverse.j2
 @@ -0,0 +1,15 @@
 +$TTL	604800
 +42.168.192.in-addr.arpa.	IN	SOA	IrishIRL-2.yolo.live. irishirl.yolo.live. (
@@ -762,16 +762,16 @@ skipping: [IrishIRL-3]
 +42.168.192.in-addr.arpa.        IN      NS      IrishIRL-1.
 +42.168.192.in-addr.arpa.        IN      NS      IrishIRL-2.
 +42.168.192.in-addr.arpa.        IN      NS      IrishIRL-3.
-+185 IN PTR IrishIRL-1.yolo.live.
-+165 IN PTR IrishIRL-2.yolo.live.
-+54 IN PTR IrishIRL-3.yolo.live.
++187 IN PTR IrishIRL-1.yolo.live.
++33 IN PTR IrishIRL-2.yolo.live.
++130 IN PTR IrishIRL-3.yolo.live.
 +192.168.42.132 IN PTR backup.yolo.live.
 
 changed: [IrishIRL-1]
 
 TASK [bind : Copy named.conf.local config] *************************************
 --- before: /etc/bind/named.conf.local
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpe5fhbynm/named.conf.local.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp2jd3pzqk/named.conf.local.j2
 @@ -1,8 +1,14 @@
 -//
 -// Do any local configuration here
@@ -796,53 +796,53 @@ TASK [bind : Copy named.conf.local config] *************************************
 
 changed: [IrishIRL-1]
 --- before: /etc/bind/named.conf.local
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp_k4nynxr/named.conf.local.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpvgfx88wp/named.conf.local.j2
 @@ -1,8 +1,15 @@
 -//
 -// Do any local configuration here
 -//
 +zone "yolo.live" {
 +    type slave;
-+    masters { 192.168.42.185 ;};
++    masters { 192.168.42.187 ;};
 +    file "db.yolo";
 +};
  
 -// Consider adding the 1918 zones here, if they are not used in your
 -// organization
 -//include "/etc/bind/zones.rfc1918";
-+server 192.168.42.185 {
++server 192.168.42.187 {
 +  keys {dns_transfer_key;};
 +};
  
 +zone "42.168.192.in-addr.arpa" {
 +    type slave;
-+    masters { 192.168.42.185 ;};
++    masters { 192.168.42.187 ;};
 +    file "db.reverse";
 +};
 
 changed: [IrishIRL-3]
 --- before: /etc/bind/named.conf.local
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmprtom5_bp/named.conf.local.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp75oy8x25/named.conf.local.j2
 @@ -1,8 +1,15 @@
 -//
 -// Do any local configuration here
 -//
 +zone "yolo.live" {
 +    type slave;
-+    masters { 192.168.42.185 ;};
++    masters { 192.168.42.187 ;};
 +    file "db.yolo";
 +};
  
 -// Consider adding the 1918 zones here, if they are not used in your
 -// organization
 -//include "/etc/bind/zones.rfc1918";
-+server 192.168.42.185 {
++server 192.168.42.187 {
 +  keys {dns_transfer_key;};
 +};
  
 +zone "42.168.192.in-addr.arpa" {
 +    type slave;
-+    masters { 192.168.42.185 ;};
++    masters { 192.168.42.187 ;};
 +    file "db.reverse";
 +};
 
@@ -857,25 +857,25 @@ TASK [bind_exporter : Install Bind Exporter] ***********************************
 The following NEW packages will be installed:
   prometheus-bind-exporter
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
+changed: [IrishIRL-3]
+The following NEW packages will be installed:
+  prometheus-bind-exporter
+0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
 changed: [IrishIRL-1]
 The following NEW packages will be installed:
   prometheus-bind-exporter
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
 changed: [IrishIRL-2]
-The following NEW packages will be installed:
-  prometheus-bind-exporter
-0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-3]
 
 TASK [bind_exporter : Make sure exporter is running] ***************************
 ok: [IrishIRL-1]
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 RUNNING HANDLER [bind : restart bind] ******************************************
-changed: [IrishIRL-3]
 changed: [IrishIRL-2]
 changed: [IrishIRL-1]
+changed: [IrishIRL-3]
 
 RUNNING HANDLER [bind : restart db] ********************************************
 changed: [IrishIRL-1]
@@ -884,12 +884,12 @@ PLAY [systemd-resolved] ********************************************************
 
 TASK [systemd-resolved : Stop default DNS] *************************************
 changed: [IrishIRL-3]
-changed: [IrishIRL-2]
 changed: [IrishIRL-1]
+changed: [IrishIRL-2]
 
 TASK [systemd-resolved : Replace resolv.conf] **********************************
 --- before: /etc/resolv.conf
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp7oej3c_l/resolv.conf.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpwzcakbbp/resolv.conf.j2
 @@ -1,19 +1,3 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -910,13 +910,13 @@ TASK [systemd-resolved : Replace resolv.conf] **********************************
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.165
-+nameserver 192.168.42.54
++nameserver 192.168.42.33
++nameserver 192.168.42.130
 +search yolo.live
 
 changed: [IrishIRL-1]
 --- before: /etc/resolv.conf
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp0fw_4q5n/resolv.conf.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpk7rd8sos/resolv.conf.j2
 @@ -1,19 +1,3 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -937,13 +937,13 @@ changed: [IrishIRL-1]
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.165
-+nameserver 192.168.42.54
++nameserver 192.168.42.33
++nameserver 192.168.42.130
 +search yolo.live
 
 changed: [IrishIRL-3]
 --- before: /etc/resolv.conf
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpuzew2llv/resolv.conf.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp6kc2depd/resolv.conf.j2
 @@ -1,19 +1,3 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -964,8 +964,8 @@ changed: [IrishIRL-3]
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.165
-+nameserver 192.168.42.54
++nameserver 192.168.42.33
++nameserver 192.168.42.130
 +search yolo.live
 
 changed: [IrishIRL-2]
@@ -1049,26 +1049,26 @@ changed: [IrishIRL-2]
 
 TASK [mysql : Copy new config for MySQL] ***************************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpl88ni7mr/override.cnf.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp3ecjw2_d/override.cnf.j2
 @@ -0,0 +1,7 @@
 +[mysqld]
 +bind-address = 0.0.0.0
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 54
++server-id = 130
 +
 
 changed: [IrishIRL-3]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpup4310g3/override.cnf.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmplg_2ioh9/override.cnf.j2
 @@ -0,0 +1,7 @@
 +[mysqld]
 +bind-address = 0.0.0.0
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 165
++server-id = 33
 +
 
 changed: [IrishIRL-2]
@@ -1078,16 +1078,16 @@ ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 TASK [mysql : Create MySQL database] *******************************************
-changed: [IrishIRL-2]
 changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 
 TASK [mysql : Create MySQL user agama] *****************************************
-changed: [IrishIRL-2]
 changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 
 TASK [mysql : Create MySQL user replication] ***********************************
-changed: [IrishIRL-3]
 changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [mysql : Set Read Only ON] ************************************************
 skipping: [IrishIRL-3]
@@ -1113,7 +1113,7 @@ changed: [IrishIRL-3]
 
 TASK [mysql_exporter : Update prometheus-mysqld-exporter to export MySQL data] ***
 --- before: /etc/default/prometheus-mysqld-exporter
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpwv8wppsk/prometheus-mysqld-exporter
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp3yc6gis1/prometheus-mysqld-exporter
 @@ -1,120 +1 @@
 -# By default the connection string will be read from
 -# $HOME/my.cnf or from the file specified with the -config.my-cnf parameter.
@@ -1239,7 +1239,7 @@ TASK [mysql_exporter : Update prometheus-mysqld-exporter to export MySQL data] *
 
 changed: [IrishIRL-3]
 --- before: /etc/default/prometheus-mysqld-exporter
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp1bpa2c3c/prometheus-mysqld-exporter
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp8_pd2879/prometheus-mysqld-exporter
 @@ -1,120 +1 @@
 -# By default the connection string will be read from
 -# $HOME/my.cnf or from the file specified with the -config.my-cnf parameter.
@@ -1374,8 +1374,8 @@ ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 TASK [mysql_exporter : Add MySQL exporter config] ******************************
-changed: [IrishIRL-2]
 changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 
 TASK [mysql_exporter : Make sure exporter is running] **************************
 changed: [IrishIRL-3]
@@ -1395,7 +1395,7 @@ TASK [mysql_backup : Make folder backup/mysql] *********************************
 +    "state": "directory"
  }
 
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 --- before
 +++ after
 @@ -1,6 +1,6 @@
@@ -1409,7 +1409,7 @@ changed: [IrishIRL-2]
 +    "state": "directory"
  }
 
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 
 TASK [mysql_backup : Create MySQL user backup] *********************************
 changed: [IrishIRL-2]
@@ -1421,23 +1421,23 @@ changed: [IrishIRL-2]
 
 TASK [mysql_backup : Create file mysql-backup] *********************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp4u8_utdh/mysql-backup.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpwwjbuc5a/mysql-backup.j2
+@@ -0,0 +1 @@
++
+
+changed: [IrishIRL-3]
+--- before
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp1qxs2kum/mysql-backup.j2
 @@ -0,0 +1,3 @@
 +22 23 * * *  backup mysqldump agama > /home/backup/mysql/agama.sql
 +47 23 * * 0  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://IrishIRL@backup.yolo.live//home/IrishIRL/mysql
 +47 23 * * 1-6  backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://IrishIRL@backup.yolo.live//home/IrishIRL/mysql
 
 changed: [IrishIRL-2]
---- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpv16joosu/mysql-backup.j2
-@@ -0,0 +1 @@
-+
-
-changed: [IrishIRL-3]
 
 RUNNING HANDLER [mysql : Restart MySQL] ****************************************
-changed: [IrishIRL-2]
 changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 
 RUNNING HANDLER [mysql : Reset MySQL source] ***********************************
 skipping: [IrishIRL-2] => (item=stopreplica) 
@@ -1456,8 +1456,8 @@ changed: [IrishIRL-2] => (item=resetreplica)
 changed: [IrishIRL-2] => (item=startreplica)
 
 RUNNING HANDLER [mysql_exporter : restart mysqld export] ***********************
-changed: [IrishIRL-2]
 changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 
 RUNNING HANDLER [mysql_backup : restart mysql] *********************************
 changed: [IrishIRL-2]
@@ -1476,7 +1476,7 @@ The following additional packages will be installed:
 The following NEW packages will be installed:
   iptables-persistent netfilter-persistent
 0 upgraded, 2 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 The following additional packages will be installed:
   netfilter-persistent
 The following NEW packages will be installed:
@@ -1488,13 +1488,13 @@ The following additional packages will be installed:
 The following NEW packages will be installed:
   iptables-persistent netfilter-persistent
 0 upgraded, 2 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [iptables : Upload rule] **************************************************
 --- before: /etc/iptables/rules.v4
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpv9i5q7r3/mangle
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmptdqwr3ql/mangle
 @@ -1,7 +1,8 @@
--# Generated by iptables-save v1.8.4 on Tue Jan 18 09:09:50 2022
+-# Generated by iptables-save v1.8.4 on Mon Jan 17 19:59:55 2022
 -*filter
 +*mangle
 +:PREROUTING ACCEPT [0:0]
@@ -1504,13 +1504,29 @@ TASK [iptables : Upload rule] **************************************************
 +:POSTROUTING ACCEPT [0:0]
 +-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
  COMMIT
--# Completed on Tue Jan 18 09:09:50 2022
+-# Completed on Mon Jan 17 19:59:55 2022
+
+changed: [IrishIRL-3]
+--- before: /etc/iptables/rules.v4
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmptz_tdr90/mangle
+@@ -1,7 +1,8 @@
+-# Generated by iptables-save v1.8.4 on Mon Jan 17 19:59:55 2022
+-*filter
++*mangle
++:PREROUTING ACCEPT [0:0]
+ :INPUT ACCEPT [0:0]
+ :FORWARD ACCEPT [0:0]
+ :OUTPUT ACCEPT [0:0]
++:POSTROUTING ACCEPT [0:0]
++-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
+ COMMIT
+-# Completed on Mon Jan 17 19:59:55 2022
 
 changed: [IrishIRL-1]
 --- before: /etc/iptables/rules.v4
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmppwxjsa51/mangle
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpvhkxgz36/mangle
 @@ -1,7 +1,8 @@
--# Generated by iptables-save v1.8.4 on Tue Jan 18 09:09:52 2022
+-# Generated by iptables-save v1.8.4 on Mon Jan 17 19:59:54 2022
 -*filter
 +*mangle
 +:PREROUTING ACCEPT [0:0]
@@ -1520,29 +1536,13 @@ changed: [IrishIRL-1]
 +:POSTROUTING ACCEPT [0:0]
 +-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
  COMMIT
--# Completed on Tue Jan 18 09:09:52 2022
+-# Completed on Mon Jan 17 19:59:54 2022
 
 changed: [IrishIRL-2]
---- before: /etc/iptables/rules.v4
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpgl31rbbl/mangle
-@@ -1,7 +1,8 @@
--# Generated by iptables-save v1.8.4 on Tue Jan 18 09:09:51 2022
--*filter
-+*mangle
-+:PREROUTING ACCEPT [0:0]
- :INPUT ACCEPT [0:0]
- :FORWARD ACCEPT [0:0]
- :OUTPUT ACCEPT [0:0]
-+:POSTROUTING ACCEPT [0:0]
-+-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
- COMMIT
--# Completed on Tue Jan 18 09:09:51 2022
-
-changed: [IrishIRL-3]
 
 TASK [iptables : Upload mangle] ************************************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmps28c1em6/mangle
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmppq6h8jvj/mangle
 @@ -0,0 +1,8 @@
 +*mangle
 +:PREROUTING ACCEPT [0:0]
@@ -1555,20 +1555,7 @@ TASK [iptables : Upload mangle] ************************************************
 
 changed: [IrishIRL-1]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpzlylth26/mangle
-@@ -0,0 +1,8 @@
-+*mangle
-+:PREROUTING ACCEPT [0:0]
-+:INPUT ACCEPT [0:0]
-+:FORWARD ACCEPT [0:0]
-+:OUTPUT ACCEPT [0:0]
-+:POSTROUTING ACCEPT [0:0]
-+-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
-+COMMIT
-
-changed: [IrishIRL-2]
---- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp29m8hduq/mangle
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp2j7890lq/mangle
 @@ -0,0 +1,8 @@
 +*mangle
 +:PREROUTING ACCEPT [0:0]
@@ -1580,6 +1567,19 @@ changed: [IrishIRL-2]
 +COMMIT
 
 changed: [IrishIRL-3]
+--- before
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpdmo1rlh4/mangle
+@@ -0,0 +1,8 @@
++*mangle
++:PREROUTING ACCEPT [0:0]
++:INPUT ACCEPT [0:0]
++:FORWARD ACCEPT [0:0]
++:OUTPUT ACCEPT [0:0]
++:POSTROUTING ACCEPT [0:0]
++-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
++COMMIT
+
+changed: [IrishIRL-2]
 
 TASK [iptables : Iptables restore] *********************************************
 [WARNING]: Attempts to restore iptables state without rollback in case of
@@ -1597,9 +1597,9 @@ mistake may lead the ansible controller to loose access to the hosts and never
 regain it before fixing firewall rules through a serial console, or any other
 way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
 to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+changed: [IrishIRL-3]
 changed: [IrishIRL-2]
 changed: [IrishIRL-1]
-changed: [IrishIRL-3]
 
 TASK [docker : Install Docker package] *****************************************
 The following additional packages will be installed:
@@ -1623,7 +1623,7 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 10 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 The following additional packages will be installed:
   bridge-utils containerd dnsmasq-base libidn11 pigz python3-websocket runc
   ubuntu-fan
@@ -1634,18 +1634,18 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 10 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [docker : Docker service start] *******************************************
-ok: [IrishIRL-1]
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 
 PLAY [Agama servers] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [agama : opt/agama directory] *********************************************
 --- before
@@ -1670,25 +1670,14 @@ changed: [IrishIRL-3]
 changed: [IrishIRL-2]
 
 TASK [agama : Download Agama dockerfile] ***************************************
-changed: [IrishIRL-3]
 changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [agama : Agama Docker image] **********************************************
 changed: [IrishIRL-2]
 changed: [IrishIRL-3]
 
 TASK [agama : Agama Docker container] ******************************************
---- before
-+++ after
-@@ -1,4 +1,4 @@
- {
--    "exists": false,
--    "running": false
-+    "exists": true,
-+    "running": true
- }
-
-changed: [IrishIRL-2] => (item={'key': 'item1', 'value': 1})
 --- before
 +++ after
 @@ -1,4 +1,4 @@
@@ -1710,7 +1699,7 @@ changed: [IrishIRL-3] => (item={'key': 'item1', 'value': 1})
 +    "running": true
  }
 
-changed: [IrishIRL-2] => (item={'key': 'item2', 'value': 9})
+changed: [IrishIRL-2] => (item={'key': 'item1', 'value': 1})
 --- before
 +++ after
 @@ -1,4 +1,4 @@
@@ -1722,6 +1711,17 @@ changed: [IrishIRL-2] => (item={'key': 'item2', 'value': 9})
  }
 
 changed: [IrishIRL-3] => (item={'key': 'item2', 'value': 9})
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+-    "exists": false,
+-    "running": false
++    "exists": true,
++    "running": true
+ }
+
+changed: [IrishIRL-2] => (item={'key': 'item2', 'value': 9})
 
 PLAY [Prometheus server] *******************************************************
 
@@ -1752,7 +1752,7 @@ changed: [IrishIRL-1]
 
 TASK [prometheus : Update Prometheus config] ***********************************
 --- before: /etc/prometheus/prometheus.yml
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp36w5vfsg/prometheus.yml
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpjha8ngld/prometheus.yml
 @@ -1,44 +1,57 @@
 -# Sample config for Prometheus.
 -
@@ -1847,7 +1847,7 @@ changed: [IrishIRL-1]
 
 TASK [prometheus : Update Prometheus Args] *************************************
 --- before: /etc/default/prometheus
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpm9fm3eej/default_prometheus
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpa9a9l81s/default_prometheus
 @@ -1,57 +1 @@
 -# Set the command-line arguments to pass to the server.
 -ARGS=""
@@ -1906,7 +1906,7 @@ TASK [prometheus : Update Prometheus Args] *************************************
 -#                             Maximum number of queries executed concurrently.
 -#  --log.level=info           Only log messages with the given severity or
 -#                             above. One of: [debug, info, warn, error]
-+ARGS="--web.external-url=http://193.40.156.67:18580/prometheus"
++ARGS="--web.external-url=http://193.40.156.67:18780/prometheus"
 
 changed: [IrishIRL-1]
 
@@ -1961,7 +1961,7 @@ changed: [IrishIRL-1]
 
 TASK [grafana : Grafana Prometheus preset] *************************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpw4bs92c5/main.yaml.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpqdtm13ol/main.yaml.j2
 @@ -0,0 +1,24 @@
 +apiVersion: 1
 +
@@ -5414,7 +5414,7 @@ changed: [IrishIRL-1]
 
 TASK [pinger : Copy pinger.conf] ***********************************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpuvto5xta/pinger.conf.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpl4x43vr4/pinger.conf.j2
 @@ -0,0 +1,3 @@
 +database_url=http://IrishIRL-1:8086
 +database_name=latency
@@ -5469,7 +5469,7 @@ changed: [IrishIRL-1]
 
 TASK [influxdb_backup : Create file influxdb-backup] ***************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpw0dkrvh5/influxdb-backup.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp3emv2ndx/influxdb-backup.j2
 @@ -0,0 +1,3 @@
 +22 23 * * *  backup rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb
 +47 23 * * 0  backup  duplicity --no-encryption full /home/backup/influxdb/ rsync://IrishIRL@backup.yolo.live//home/IrishIRL/influxdb
@@ -5498,18 +5498,7 @@ ok: [IrishIRL-3]
 
 TASK [rsyslog : Copy Rsyslog Telegraf config file] *****************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpdi9ev_7j/10-telegraf.conf
-@@ -0,0 +1,6 @@
-+$ActionQueueType LinkedList # use asynchronous processing
-+$ActionQueueFileName srvrfwd # set file name, also enables disk mode
-+$ActionResumeRetryCount -1 # infinite retries on insert failure
-+$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
-+
-+*.* @IrishIRL-1:6514;RSYSLOG_SyslogProtocol23Format
-
-changed: [IrishIRL-3]
---- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpjs_cql49/10-telegraf.conf
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpzslmpquq/10-telegraf.conf
 @@ -0,0 +1,6 @@
 +$ActionQueueType LinkedList # use asynchronous processing
 +$ActionQueueFileName srvrfwd # set file name, also enables disk mode
@@ -5520,7 +5509,18 @@ changed: [IrishIRL-3]
 
 changed: [IrishIRL-2]
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp1rzpe4mk/10-telegraf.conf
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpge4ibl4m/10-telegraf.conf
+@@ -0,0 +1,6 @@
++$ActionQueueType LinkedList # use asynchronous processing
++$ActionQueueFileName srvrfwd # set file name, also enables disk mode
++$ActionResumeRetryCount -1 # infinite retries on insert failure
++$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
++
++*.* @IrishIRL-1:6514;RSYSLOG_SyslogProtocol23Format
+
+changed: [IrishIRL-3]
+--- before
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp6l40l4iw/10-telegraf.conf
 @@ -0,0 +1,6 @@
 +$ActionQueueType LinkedList # use asynchronous processing
 +$ActionQueueFileName srvrfwd # set file name, also enables disk mode
@@ -5532,9 +5532,9 @@ changed: [IrishIRL-2]
 changed: [IrishIRL-1]
 
 TASK [rsyslog : Make sure rsyslog.service] *************************************
-ok: [IrishIRL-1]
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 
 TASK [node_exporter : Install Node Exporter package] ***************************
 ok: [IrishIRL-1]
@@ -5560,14 +5560,14 @@ The following NEW packages will be installed:
 changed: [IrishIRL-3]
 
 TASK [node_exporter : Start node exporter automatically with boot] *************
+ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 ok: [IrishIRL-1]
-ok: [IrishIRL-2]
 
 RUNNING HANDLER [rsyslog : restart rsyslog] ************************************
-changed: [IrishIRL-1]
 changed: [IrishIRL-2]
 changed: [IrishIRL-3]
+changed: [IrishIRL-1]
 
 PLAY [HAProxy and keepalived] **************************************************
 
@@ -5599,7 +5599,7 @@ ok: [IrishIRL-3]
 
 TASK [haproxy : Copy HAproxy config] *******************************************
 --- before: /etc/haproxy/haproxy.cfg
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpseabgdyo/haproxy.cfg.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp0dp7fa10/haproxy.cfg.j2
 @@ -7,15 +7,6 @@
  	user haproxy
  	group haproxy
@@ -5627,15 +5627,15 @@ TASK [haproxy : Copy HAproxy config] *******************************************
 +    stats uri /stats
 +    stats enable
 +
-+    server IrishIRL-21 IrishIRL-2:9001 check
-+    server IrishIRL-29 IrishIRL-2:9009 check
-+    server IrishIRL-31 IrishIRL-3:9001 check
-+    server IrishIRL-39 IrishIRL-3:9009 check
++    server IrishIRL-21 IrishIRL-2:8001 check
++    server IrishIRL-22 IrishIRL-2:8002 check
++    server IrishIRL-31 IrishIRL-3:8001 check
++    server IrishIRL-32 IrishIRL-3:8002 check
 +    
 
 changed: [IrishIRL-2]
 --- before: /etc/haproxy/haproxy.cfg
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmp2q9v_kd9/haproxy.cfg.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp1zspotam/haproxy.cfg.j2
 @@ -7,15 +7,6 @@
  	user haproxy
  	group haproxy
@@ -5663,10 +5663,10 @@ changed: [IrishIRL-2]
 +    stats uri /stats
 +    stats enable
 +
-+    server IrishIRL-21 IrishIRL-2:9001 check
-+    server IrishIRL-29 IrishIRL-2:9009 check
-+    server IrishIRL-31 IrishIRL-3:9001 check
-+    server IrishIRL-39 IrishIRL-3:9009 check
++    server IrishIRL-21 IrishIRL-2:8001 check
++    server IrishIRL-22 IrishIRL-2:8002 check
++    server IrishIRL-31 IrishIRL-3:8001 check
++    server IrishIRL-32 IrishIRL-3:8002 check
 +    
 
 changed: [IrishIRL-3]
@@ -5675,19 +5675,19 @@ TASK [haproxy : Install HAproxy exporter] **************************************
 The following NEW packages will be installed:
   prometheus-haproxy-exporter
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 The following NEW packages will be installed:
   prometheus-haproxy-exporter
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [haproxy : Make sure haproxy exporter is running] *************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [haproxy : Copy HAproxy exporter config] **********************************
 --- before: /etc/default/prometheus-haproxy-exporter
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpwpfe3q7f/prometheus-haproxy-exporter.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmph53dkege/prometheus-haproxy-exporter.j2
 @@ -1,35 +1 @@
 -# Set the command-line arguments to pass to the server.
 -# Due to shell scaping, to pass backslashes for regexes, you need to double
@@ -5728,7 +5728,7 @@ TASK [haproxy : Copy HAproxy exporter config] **********************************
 
 changed: [IrishIRL-2]
 --- before: /etc/default/prometheus-haproxy-exporter
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpfkv74znq/prometheus-haproxy-exporter.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpgz2uoeir/prometheus-haproxy-exporter.j2
 @@ -1,35 +1 @@
 -# Set the command-line arguments to pass to the server.
 -# Due to shell scaping, to pass backslashes for regexes, you need to double
@@ -5779,7 +5779,7 @@ The following NEW packages will be installed:
   ipvsadm keepalived libmysqlclient21 libnl-3-200 libnl-genl-3-200
   libsensors-config libsensors5 libsnmp-base libsnmp35
 0 upgraded, 9 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 The following additional packages will be installed:
   ipvsadm libmysqlclient21 libnl-3-200 libnl-genl-3-200 libsensors-config
   libsensors5 libsnmp-base libsnmp35
@@ -5789,15 +5789,15 @@ The following NEW packages will be installed:
   ipvsadm keepalived libmysqlclient21 libnl-3-200 libnl-genl-3-200
   libsensors-config libsensors5 libsnmp-base libsnmp35
 0 upgraded, 9 newly installed, 0 to remove and 140 not upgraded.
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [keepalived : Make sure keepalived is running] ****************************
 changed: [IrishIRL-2]
 changed: [IrishIRL-3]
 
 TASK [keepalived : Make keepalived user] ***************************************
-changed: [IrishIRL-3]
 changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [keepalived : Copy vrrp script] *******************************************
 --- before
@@ -5806,49 +5806,18 @@ TASK [keepalived : Copy vrrp script] *******************************************
 +#!/bin/bash
 +ss -ntl | grep -q ':88 '
 
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 --- before
 +++ after: /home/mark/Desktop/ica0002/roles/keepalived/files/vrrp_script
 @@ -0,0 +1,2 @@
 +#!/bin/bash
 +ss -ntl | grep -q ':88 '
 
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [keepalived : Copy keepalived config] *************************************
 --- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpua02dbaw/keepalived.conf.j2
-@@ -0,0 +1,26 @@
-+global_defs {
-+    enable_script_security
-+}
-+
-+vrrp_script check_haproxy {                 
-+    script "/home/keepalived_script/vrrp_script"
-+    weight 20
-+    interval 1
-+}
-+
-+vrrp_instance agama {
-+    interface ens3
-+    virtual_router_id 51
-+    priority 99
-+    advert_int 1
-+    virtual_ipaddress {                     
-+        192.168.100.165/24
-+    }
-+    unicast_peer {    
-+                                      
-+        192.168.42.165
-+                                    }
-+    track_script {
-+        check_haproxy
-+    }
-+}
-
-changed: [IrishIRL-3]
---- before
-+++ after: /home/mark/.ansible/tmp/ansible-local-3690314ml9gpm/tmpj98pddn7/keepalived.conf.j2
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmpwff802ap/keepalived.conf.j2
 @@ -0,0 +1,26 @@
 +global_defs {
 +    enable_script_security
@@ -5866,11 +5835,11 @@ changed: [IrishIRL-3]
 +    priority 100
 +    advert_int 1
 +    virtual_ipaddress {                     
-+        192.168.100.165/24
++        192.168.100.33/24
 +    }
 +    unicast_peer {    
 +                                                      
-+        192.168.42.54
++        192.168.42.130
 +                    }
 +    track_script {
 +        check_haproxy
@@ -5878,6 +5847,37 @@ changed: [IrishIRL-3]
 +}
 
 changed: [IrishIRL-2]
+--- before
++++ after: /home/mark/.ansible/tmp/ansible-local-2745_rn7v9nz/tmp1cva5zwl/keepalived.conf.j2
+@@ -0,0 +1,26 @@
++global_defs {
++    enable_script_security
++}
++
++vrrp_script check_haproxy {                 
++    script "/home/keepalived_script/vrrp_script"
++    weight 20
++    interval 1
++}
++
++vrrp_instance agama {
++    interface ens3
++    virtual_router_id 51
++    priority 99
++    advert_int 1
++    virtual_ipaddress {                     
++        192.168.100.33/24
++    }
++    unicast_peer {    
++                                      
++        192.168.42.33
++                                    }
++    track_script {
++        check_haproxy
++    }
++}
+
+changed: [IrishIRL-3]
 
 TASK [keepalived : Create directory for keepalived exporter script] ************
 --- before
@@ -5889,7 +5889,7 @@ TASK [keepalived : Create directory for keepalived exporter script] ************
 +    "state": "directory"
  }
 
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 --- before
 +++ after
 @@ -1,4 +1,4 @@
@@ -5899,7 +5899,7 @@ changed: [IrishIRL-2]
 +    "state": "directory"
  }
 
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 
 TASK [keepalived : Download keepalived exporter from backup] *******************
 changed: [IrishIRL-2]
@@ -5946,7 +5946,7 @@ TASK [keepalived : Copy keepalived-exporter service] ***************************
 +[Install]
 +WantedBy=multi-user.target
 
-changed: [IrishIRL-3]
+changed: [IrishIRL-2]
 --- before
 +++ after: /home/mark/Desktop/ica0002/roles/keepalived/files/keepalived-exporter.service
 @@ -0,0 +1,12 @@
@@ -5963,7 +5963,7 @@ changed: [IrishIRL-3]
 +[Install]
 +WantedBy=multi-user.target
 
-changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 TASK [keepalived : Make sure keepalived-exporter is running] *******************
 changed: [IrishIRL-2]
@@ -5974,24 +5974,24 @@ changed: [IrishIRL-2]
 changed: [IrishIRL-3]
 
 RUNNING HANDLER [haproxy : restart haproxy exporter] ***************************
-changed: [IrishIRL-3]
 changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 RUNNING HANDLER [keepalived : restart keepalived] ******************************
-changed: [IrishIRL-3]
 changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 RUNNING HANDLER [keepalived : reload keepalived exporter] **********************
 changed: [IrishIRL-2]
 changed: [IrishIRL-3]
 
 RUNNING HANDLER [keepalived : daemon reload] ***********************************
-changed: [IrishIRL-3]
 changed: [IrishIRL-2]
+changed: [IrishIRL-3]
 
 PLAY RECAP *********************************************************************
-IrishIRL-1                 : ok=88   changed=66   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-IrishIRL-2                 : ok=93   changed=72   unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+IrishIRL-1                 : ok=88   changed=65   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+IrishIRL-2                 : ok=93   changed=71   unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
 IrishIRL-3                 : ok=93   changed=72   unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
 
 + ansible-playbook infra.yaml --diff
@@ -5999,14 +5999,14 @@ IrishIRL-3                 : ok=93   changed=72   unreachable=0    failed=0    s
 PLAY [Init] ********************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 TASK [init : Update APT cache] *************************************************
-ok: [IrishIRL-1]
 ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 
 TASK [backup : Make user backup] ***********************************************
 ok: [IrishIRL-1]
@@ -6014,101 +6014,101 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [backup : Make folder backup/restore] *************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [backup : Install Duplicity] **********************************************
 ok: [IrishIRL-2]
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [backup : Make known_hosts file on backup machine] ************************
 ok: [IrishIRL-2]
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 PLAY [Collect info about all VMs] **********************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [setup] *******************************************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 PLAY [Nginx install] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [nginx : HTTP client packages] ********************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 TASK [nginx : Copy new index.html page] ****************************************
 ok: [IrishIRL-2]
-ok: [IrishIRL-1]
 ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 
 TASK [nginx : Copy default config from local to host] **************************
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 ok: [IrishIRL-3]
 
 TASK [nginx : Start automatically with boot] ***********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 TASK [nginx_exporter : Install MySQL Exporter] *********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [nginx_exporter : Copy default config from local to host] *****************
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 ok: [IrishIRL-3]
 
 TASK [nginx_exporter : Make sure exporter is running] **************************
-ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 PLAY [DNS servers] *************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [IrishIRL-2]
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [bind : Install Bind9 package] ********************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [bind : Show debug info] **************************************************
 ok: [IrishIRL-1] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 ok: [IrishIRL-2] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 ok: [IrishIRL-3] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 
 TASK [bind : Copy Bind9 config] ************************************************
-ok: [IrishIRL-1]
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 
 TASK [bind : Copy master zone config] ******************************************
 skipping: [IrishIRL-2]
@@ -6121,35 +6121,35 @@ skipping: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 TASK [bind : Copy named.conf.local config] *************************************
-ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [bind : Start Bind9 automatically with boot] ******************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 TASK [bind_exporter : Install Bind Exporter] ***********************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [bind_exporter : Make sure exporter is running] ***************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 PLAY [systemd-resolved] ********************************************************
 
 TASK [systemd-resolved : Stop default DNS] *************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [systemd-resolved : Replace resolv.conf] **********************************
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 ok: [IrishIRL-3]
 
 PLAY [DNS records] *************************************************************
@@ -6182,8 +6182,8 @@ skipping: [IrishIRL-1]
 PLAY [Database servers] ********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql : Install MySQL server] ********************************************
 ok: [IrishIRL-2]
@@ -6218,8 +6218,8 @@ skipping: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [mysql_exporter : Install MySQL Exporter] *********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql_exporter : Update prometheus-mysqld-exporter to export MySQL data] ***
 ok: [IrishIRL-2]
@@ -6230,8 +6230,8 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [mysql_exporter : Make folder /var/lib/prometheus] ************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql_exporter : Add MySQL exporter config] ******************************
 ok: [IrishIRL-2]
@@ -6250,29 +6250,29 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [mysql_backup : Add MySQL backup config] **********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql_backup : Create file mysql-backup] *********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 PLAY [Docker servers] **********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [iptables : Install Iptables-persistent] **********************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [iptables : Upload rule] **************************************************
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 
 TASK [iptables : Upload mangle] ************************************************
 ok: [IrishIRL-2]
@@ -6295,25 +6295,25 @@ mistake may lead the ansible controller to loose access to the hosts and never
 regain it before fixing firewall rules through a serial console, or any other
 way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
 to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 ok: [IrishIRL-3]
 
 TASK [docker : Install Docker package] *****************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 ok: [IrishIRL-1]
-ok: [IrishIRL-2]
 
 TASK [docker : Docker service start] *******************************************
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 
 PLAY [Agama servers] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [agama : opt/agama directory] *********************************************
 ok: [IrishIRL-2]
@@ -6324,14 +6324,14 @@ ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 TASK [agama : Agama Docker image] **********************************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [agama : Agama Docker container] ******************************************
 ok: [IrishIRL-2] => (item={'key': 'item1', 'value': 1})
 ok: [IrishIRL-3] => (item={'key': 'item1', 'value': 1})
-ok: [IrishIRL-3] => (item={'key': 'item2', 'value': 9})
 ok: [IrishIRL-2] => (item={'key': 'item2', 'value': 9})
+ok: [IrishIRL-3] => (item={'key': 'item2', 'value': 9})
 
 PLAY [Prometheus server] *******************************************************
 
@@ -6447,19 +6447,19 @@ ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 TASK [rsyslog : Copy Rsyslog Telegraf config file] *****************************
-ok: [IrishIRL-1]
 ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 ok: [IrishIRL-2]
 
 TASK [rsyslog : Make sure rsyslog.service] *************************************
-ok: [IrishIRL-1]
 ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 ok: [IrishIRL-2]
 
 TASK [node_exporter : Install Node Exporter package] ***************************
 ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 
 TASK [node_exporter : Start node exporter automatically with boot] *************
 ok: [IrishIRL-1]
@@ -6469,20 +6469,20 @@ ok: [IrishIRL-3]
 PLAY [HAProxy and keepalived] **************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [haproxy : Install HAproxy] ***********************************************
 ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 TASK [haproxy : Make sure haproxy is running] **********************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [haproxy : Copy HAproxy config] *******************************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [haproxy : Install HAproxy exporter] **************************************
 ok: [IrishIRL-3]
@@ -6501,12 +6501,12 @@ ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 TASK [keepalived : Make sure keepalived is running] ****************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [keepalived : Make keepalived user] ***************************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [keepalived : Copy vrrp script] *******************************************
 ok: [IrishIRL-3]
@@ -6521,24 +6521,24 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [keepalived : Download keepalived exporter from backup] *******************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [keepalived : Install unzip] **********************************************
 ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 TASK [keepalived : Unzip keepalived exporter] **********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [keepalived : Copy keepalived-exporter service] ***************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [keepalived : Make sure keepalived-exporter is running] *******************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 PLAY RECAP *********************************************************************
 IrishIRL-1                 : ok=75   changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
@@ -6546,19 +6546,19 @@ IrishIRL-2                 : ok=79   changed=0    unreachable=0    failed=0    s
 IrishIRL-3                 : ok=79   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
 
 + ansible all -b -m reboot -a test_command=uptime
-IrishIRL-1 | CHANGED => {
-    "changed": true,
-    "elapsed": 48,
-    "rebooted": true
-}
 IrishIRL-3 | CHANGED => {
     "changed": true,
-    "elapsed": 56,
+    "elapsed": 34,
     "rebooted": true
 }
 IrishIRL-2 | CHANGED => {
     "changed": true,
-    "elapsed": 56,
+    "elapsed": 35,
+    "rebooted": true
+}
+IrishIRL-1 | CHANGED => {
+    "changed": true,
+    "elapsed": 40,
     "rebooted": true
 }
 + ansible-playbook infra.yaml --diff
@@ -6566,19 +6566,19 @@ IrishIRL-2 | CHANGED => {
 PLAY [Init] ********************************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [IrishIRL-2]
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [backup : Make user backup] ***********************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [backup : Make folder backup/restore] *************************************
 ok: [IrishIRL-1]
@@ -6591,9 +6591,9 @@ ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 TASK [backup : Make known_hosts file on backup machine] ************************
-ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 PLAY [Collect info about all VMs] **********************************************
 
@@ -6610,14 +6610,14 @@ ok: [IrishIRL-3]
 PLAY [Nginx install] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 ok: [IrishIRL-1]
+ok: [IrishIRL-2]
 
 TASK [nginx : HTTP client packages] ********************************************
-ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 ok: [IrishIRL-1]
+ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [nginx : Copy new index.html page] ****************************************
 ok: [IrishIRL-2]
@@ -6630,14 +6630,14 @@ ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 TASK [nginx : Start automatically with boot] ***********************************
-ok: [IrishIRL-1]
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 
 TASK [nginx_exporter : Install MySQL Exporter] *********************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [nginx_exporter : Copy default config from local to host] *****************
 ok: [IrishIRL-3]
@@ -6645,16 +6645,16 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 
 TASK [nginx_exporter : Make sure exporter is running] **************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 PLAY [DNS servers] *************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-1]
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 
 TASK [bind : Install Bind9 package] ********************************************
 ok: [IrishIRL-1]
@@ -6663,19 +6663,19 @@ ok: [IrishIRL-3]
 
 TASK [bind : Show debug info] **************************************************
 ok: [IrishIRL-1] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 ok: [IrishIRL-2] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 ok: [IrishIRL-3] => {
-    "msg": " 192.168.42.185  192.168.42.165  192.168.42.54 "
+    "msg": " 192.168.42.187  192.168.42.33  192.168.42.130 "
 }
 
 TASK [bind : Copy Bind9 config] ************************************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 ok: [IrishIRL-1]
-ok: [IrishIRL-2]
 
 TASK [bind : Copy master zone config] ******************************************
 skipping: [IrishIRL-2]
@@ -6689,23 +6689,23 @@ ok: [IrishIRL-1]
 
 TASK [bind : Copy named.conf.local config] *************************************
 ok: [IrishIRL-1]
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [bind : Start Bind9 automatically with boot] ******************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [bind_exporter : Install Bind Exporter] ***********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [bind_exporter : Make sure exporter is running] ***************************
 ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 
 PLAY [systemd-resolved] ********************************************************
 
@@ -6716,8 +6716,8 @@ ok: [IrishIRL-3]
 
 TASK [systemd-resolved : Replace resolv.conf] **********************************
 ok: [IrishIRL-1]
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 PLAY [DNS records] *************************************************************
 
@@ -6753,16 +6753,16 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [mysql : Install MySQL server] ********************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql : Copy new config for MySQL] ***************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql : Start MySQL server] **********************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql : Create MySQL database] *******************************************
 ok: [IrishIRL-2]
@@ -6773,8 +6773,8 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [mysql : Create MySQL user replication] ***********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql : Set Read Only ON] ************************************************
 skipping: [IrishIRL-3]
@@ -6785,16 +6785,16 @@ skipping: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [mysql_exporter : Install MySQL Exporter] *********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql_exporter : Update prometheus-mysqld-exporter to export MySQL data] ***
 ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 TASK [mysql_exporter : Create MySQL user export] *******************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql_exporter : Make folder /var/lib/prometheus] ************************
 ok: [IrishIRL-3]
@@ -6805,12 +6805,12 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [mysql_exporter : Make sure exporter is running] **************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql_backup : Make folder backup/mysql] *********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [mysql_backup : Create MySQL user backup] *********************************
 ok: [IrishIRL-2]
@@ -6828,23 +6828,23 @@ PLAY [Docker servers] **********************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [IrishIRL-1]
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [iptables : Install Iptables-persistent] **********************************
-ok: [IrishIRL-2]
-ok: [IrishIRL-1]
 ok: [IrishIRL-3]
+ok: [IrishIRL-1]
+ok: [IrishIRL-2]
 
 TASK [iptables : Upload rule] **************************************************
-ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [iptables : Upload mangle] ************************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [iptables : Iptables restore] *********************************************
 [WARNING]: Attempts to restore iptables state without rollback in case of
@@ -6867,14 +6867,14 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [docker : Install Docker package] *****************************************
-ok: [IrishIRL-3]
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 
 TASK [docker : Docker service start] *******************************************
-ok: [IrishIRL-1]
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
+ok: [IrishIRL-1]
 
 PLAY [Agama servers] ***********************************************************
 
@@ -6883,22 +6883,22 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [agama : opt/agama directory] *********************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [agama : Download Agama dockerfile] ***************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [agama : Agama Docker image] **********************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [agama : Agama Docker container] ******************************************
-ok: [IrishIRL-3] => (item={'key': 'item1', 'value': 1})
 ok: [IrishIRL-2] => (item={'key': 'item1', 'value': 1})
-ok: [IrishIRL-3] => (item={'key': 'item2', 'value': 9})
+ok: [IrishIRL-3] => (item={'key': 'item1', 'value': 1})
 ok: [IrishIRL-2] => (item={'key': 'item2', 'value': 9})
+ok: [IrishIRL-3] => (item={'key': 'item2', 'value': 9})
 
 PLAY [Prometheus server] *******************************************************
 
@@ -7009,14 +7009,14 @@ ok: [IrishIRL-1]
 PLAY [Rsyslog influx logging] **************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-1]
 ok: [IrishIRL-2]
+ok: [IrishIRL-1]
 ok: [IrishIRL-3]
 
 TASK [rsyslog : Copy Rsyslog Telegraf config file] *****************************
+ok: [IrishIRL-2]
 ok: [IrishIRL-1]
 ok: [IrishIRL-3]
-ok: [IrishIRL-2]
 
 TASK [rsyslog : Make sure rsyslog.service] *************************************
 ok: [IrishIRL-2]
@@ -7024,52 +7024,52 @@ ok: [IrishIRL-3]
 ok: [IrishIRL-1]
 
 TASK [node_exporter : Install Node Exporter package] ***************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-1]
+ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [node_exporter : Start node exporter automatically with boot] *************
-ok: [IrishIRL-3]
 ok: [IrishIRL-1]
+ok: [IrishIRL-3]
 ok: [IrishIRL-2]
 
 PLAY [HAProxy and keepalived] **************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [haproxy : Install HAproxy] ***********************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [haproxy : Make sure haproxy is running] **********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [haproxy : Copy HAproxy config] *******************************************
 ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [haproxy : Install HAproxy exporter] **************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [haproxy : Make sure haproxy exporter is running] *************************
 ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [haproxy : Copy HAproxy exporter config] **********************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [keepalived : Install keepalived] *****************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [keepalived : Make sure keepalived is running] ****************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [keepalived : Make keepalived user] ***************************************
 ok: [IrishIRL-2]
@@ -7088,24 +7088,24 @@ ok: [IrishIRL-2]
 ok: [IrishIRL-3]
 
 TASK [keepalived : Download keepalived exporter from backup] *******************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [keepalived : Install unzip] **********************************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [keepalived : Unzip keepalived exporter] **********************************
-ok: [IrishIRL-2]
 ok: [IrishIRL-3]
+ok: [IrishIRL-2]
 
 TASK [keepalived : Copy keepalived-exporter service] ***************************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 TASK [keepalived : Make sure keepalived-exporter is running] *******************
-ok: [IrishIRL-3]
 ok: [IrishIRL-2]
+ok: [IrishIRL-3]
 
 PLAY RECAP *********************************************************************
 IrishIRL-1                 : ok=75   changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
@@ -7113,4 +7113,4 @@ IrishIRL-2                 : ok=79   changed=0    unreachable=0    failed=0    s
 IrishIRL-3                 : ok=79   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
 
 + date
-Tue 18 Jan 2022 01:29:48 AM PST
+Mon 17 Jan 2022 12:17:07 PM PST
