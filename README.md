@@ -7,7 +7,7 @@ Grade: Pass
 
 ## Task
 In this course work it was required to deploy IT infrastructure with ansible.<br>
-<b>No human input on the servers should be required.<b>
+<b>No human input on the servers should be required.</b>
 
 ~~~~
 Required to deploy:
