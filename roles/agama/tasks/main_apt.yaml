@@ -28,6 +28,6 @@
   
 - name: Install AGAMA
   ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
+    url: https://raw.githubusercontent.com/---/agama/master/agama.py
     dest: /opt/agama
 
