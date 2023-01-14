@@ -5,7 +5,7 @@
 
 - name: Download Agama dockerfile
   ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/hudolejev/agama/master/Dockerfile
+    url: https://raw.githubusercontent.com/---/agama/master/Dockerfile
     dest: /opt/agama/Dockerfile
 
 - name: Agama Docker image
