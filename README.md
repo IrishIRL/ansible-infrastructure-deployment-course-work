@@ -21,3 +21,9 @@ Required to deploy:
 8. Backups for MySQL, InfluxDB 
 And much more.
 ~~~~
+
+## Message to lecturers
+
+I have removed all the mentions of the course name and mentions of your repos, so it is harder to find for the next year students.<br>
+I have also heard that next year tasks were rewritten, so I suppose this repo could not be used to pass the course by others.<br>   
+Please contact me if this repository still needs to be private.
