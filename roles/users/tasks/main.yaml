@@ -1,21 +1,21 @@
-- name: Make user juri
+- name: Make user user1
   ansible.builtin.user:
-    name: juri
+    name: user1
 
-- name: Make user roman
+- name: Make user user2
   ansible.builtin.user:
-    name: roman
+    name: user2
 
-- name: Set authorized key for juri without validating the TLS/SSL certificates
+- name: Set authorized key for user1 without validating the TLS/SSL certificates
   ansible.posix.authorized_key:
-    user: juri
+    user: user1
     state: present
-    key: https://github.com/hudolejev.keys
+    key: https://github.com/---.keys
     validate_certs: False
 
-- name: Set authorized key for roman without validating the TLS/SSL certificates
+- name: Set authorized key for user2 without validating the TLS/SSL certificates
   ansible.posix.authorized_key:
-    user: roman   
+    user: user2   
     state: present
-    key: https://github.com/romankuchin.keys
+    key: https://github.com/---.keys
     validate_certs: False
